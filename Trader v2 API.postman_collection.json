@@ -1,0 +1,906 @@
+{
+	"info": {
+		"_postman_id": "af6823e1-0e8c-4387-9cef-dffbfbae836f",
+		"name": "Trader v2 API",
+		"description": "Alpaca's Trading API is a modern platform for algorithmic trading.\n\n| Environment   | URL                              |\n| ------------- |:--------------------------------:|\n| Paper         | https://paper-api.alpaca.markets |\n| Production    | https://api.alpaca.markets       |\n\n\nFor complete documentation on the Trading API and to obtain your keys head to https://alpaca.markets/docs/api-documentation/api-v2/. Once you have your keys, head to the environments tab to quickly get started.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"AAPL\",\n  \"qty\": \"4.125\",\n  \"notional\": \"606.66\",\n  \"side\": \"buy\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\",\n  \"commission\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/orders",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders"
+							]
+						},
+						"description": "| Attribute         | Type           | Requirement                           | Notes                                                                                                                                              |\n| ----------------- | -------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `symbol`          | string         | Required | Symbol or asset ID to identify the asset to trade                                                                                                  |\n| `qty`             | string/number  | Required | Number of shares to trade. Can be fractionable for only `market` and `day` order types.                                                            |\n| `notional`        | string/number  | Required | Dollar amount to trade. Cannot work with `qty`. Can only work for `market` order types and `time_in_force = day`.                                  |\n| `side`            | string         | Required | `buy` or `sell`                                                                                                                                    |\n| `type`            | string         | Required | `market`, `limit`, `stop`, `stop_limit`, or `trailing_stop`                                                                                        |\n| `time_in_force`   | string/number  | Required | `day`, `gtc`, `opg`, `cls`, `ioc`, `fok`. Please see Understand Orders for more info.                                                              |\n| `limit_price`     | string/number  | Optional  | Required if type is `limit` or `stop_limit`                                                                           |\n| `stop_price`      | string/number  | Optional | Required if type is `stop` or `stop_limit`                                                                            |\n| `trail_price`     | string/number  | Optional | Required if type is `trailing_stop`, `trail_price` or `trail_percent` is required                                     |\n| `trail_percent`   | string/number  | Optional  | Required if type is `trailing_stop`, `trail_price` or `trail_percent` is required                                     |\n| `extended_hours`  | string         | Optional | Defaults to `false`. If `true`, order will be eligible to execute in premarket/afterhours. Only works with type `limit` and `time_in_force = day`. |\n| `client_order_id` | string/UUID    | Optional | A unique identifier for the order. Automatically generated if not sent. (<= 48 characters)                                                         |\n| `order_class`     | string/numeric | Optional | `simple`, `bracket`, `oco` or `oto`. For details of non-simple order classes, please see Bracket Order Overview                                    |\n| `take_profit`     | object         | Optional | Takes in a string/number value for `limit_price`                                                                                                   |\n| `stop_loss`       | object         | Optional | Takes in a string/number values for `stop_price` and `limit_price`                                                                                 |\n| `commission`      | string/numeric | Optional | The commission you want to collect from the user. |"
+					},
+					"response": []
+				},
+				{
+					"name": "All Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "open",
+									"description": "Order status to be queried. open, closed or all. Defaults to open.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "50",
+									"description": "The maximum number of orders in response. Defaults to 50 and max is 500.",
+									"disabled": true
+								},
+								{
+									"key": "after",
+									"value": null,
+									"description": "The response will include only ones submitted after this timestamp (exclusive.)",
+									"disabled": true
+								},
+								{
+									"key": "until",
+									"value": null,
+									"description": "The response will include only ones submitted until this timestamp (exclusive.)",
+									"disabled": true
+								},
+								{
+									"key": "direction",
+									"value": "desc",
+									"description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc.",
+									"disabled": true
+								},
+								{
+									"key": "nested",
+									"value": "true",
+									"description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+									"disabled": true
+								},
+								{
+									"key": "symbols",
+									"value": "",
+									"description": "A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”).",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by Order ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":order_id"
+							],
+							"query": [
+								{
+									"key": "nested",
+									"value": "true",
+									"description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by Client Order ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:by_client_order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":by_client_order_id"
+							],
+							"variable": [
+								{
+									"key": "by_client_order_id",
+									"value": null,
+									"description": "Client Order ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"qty\": \"4.125\",\n  \"time_in_force\": \"day\",\n  \"client_order_id\": \"{{client_order_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":order_id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": null
+								}
+							]
+						},
+						"description": "| Attribute         | Type          | Notes                                                 |\n| ----------------- | ------------- | ----------------------------------------------------- |\n| `qty`             | string/int    | You can only patch full shares for now                |\n| `time_in_force`   | string/number | Can be `day`, `gtc`, `opg`, `cls`, `ioc` or `fok`     |\n| `limit_price`     | string/number | Required if `type` = `limit` or `stop_limit`          |\n| `stop_price`      | string/number | Required if `type` = `stop` or `stop_limit`           |\n| `trail`           | string/number | The new value of the `trail_price` or `trail_percent` |\n| `client_order_id` | string/UUID   |                                                       |"
+					},
+					"response": []
+				},
+				{
+					"name": "All Orders",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by Order ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":order_id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/orders/ to view complete documentation on the Orders API."
+		},
+		{
+			"name": "Positions",
+			"item": [
+				{
+					"name": "All Open Positions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open Position",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions/:symbol_or_asset_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions",
+								":symbol_or_asset_id"
+							],
+							"variable": [
+								{
+									"key": "symbol_or_asset_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "| Attribute | Type   | Notes                             |\n| --------- | ------ | --------------------------------- |\n| `symbol`  | string | PATH - The `symbol` or `asset_id` |"
+					},
+					"response": []
+				},
+				{
+					"name": "All Positions",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions"
+							],
+							"query": [
+								{
+									"key": "cancel_orders",
+									"value": "true",
+									"description": "If true is specified, cancel all open orders before liquidating all positions.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Position",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions/:symbol_or_asset_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions",
+								":symbol_or_asset_id"
+							],
+							"query": [
+								{
+									"key": "qty",
+									"value": "1",
+									"description": "The number of shares to liquidate",
+									"disabled": true
+								},
+								{
+									"key": "percentage",
+									"value": null,
+									"description": "Percentage of position you want to liquidate",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol_or_asset_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API."
+		},
+		{
+			"name": "Portfolio History",
+			"item": [
+				{
+					"name": "Account Portfolio History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/account/portfolio/history",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"account",
+								"portfolio",
+								"history"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "1D",
+									"description": "The duration of the data in number + unit, such as 1D. unit can be D for day, W for week, M for month and A for year. Defaults to 1M.",
+									"disabled": true
+								},
+								{
+									"key": "timeframe",
+									"value": "15Min",
+									"description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.",
+									"disabled": true
+								},
+								{
+									"key": "date_end",
+									"value": "2021-09-14",
+									"description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)",
+									"disabled": true
+								},
+								{
+									"key": "extended_hours",
+									"value": "true",
+									"description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API."
+		},
+		{
+			"name": "Watchlists",
+			"item": [
+				{
+					"name": "Watchlists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"my first watchlist\",\n  \"symbols\": [\"AAPL\",\"LMND\",\"PLTR\",\"AMZN\",\"CSCO\",\"A\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists"
+							]
+						},
+						"description": "| Parameter   | Type          | Requirement |\n|-------------|---------------|:-----------:|\n| `name`      | string        | Required    |\n| `symbols`   | array[string] | Optional    |"
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist by Watchlist ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"key": "watchlist_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Watchlist",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"my first watchlist\",\n  \"symbol\": [\"GOOG\",\"TSLA\",\"FB\",\"MSFT\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"key": "watchlist_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset to Watchlist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"DIS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"key": "watchlist_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"key": "watchlist_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Symbol from Watchlist",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id/:symbol",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id",
+								":symbol"
+							],
+							"variable": [
+								{
+									"key": "watchlist_id",
+									"value": null
+								},
+								{
+									"key": "symbol",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation on the Watchlist API."
+		},
+		{
+			"name": "Account Configurations",
+			"item": [
+				{
+					"name": "Account Configurations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"max_margin_multiplier\": 1.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/account/configurations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"account",
+								"configurations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Configurations",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/v2/account/configurations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"account",
+								"configurations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/account-configuration/ to view complete documentation on the Account Configurations API."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
