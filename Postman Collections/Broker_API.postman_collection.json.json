@@ -1,0 +1,1729 @@
+{
+  "info": {
+    "_postman_id": "aabd1790-d917-4afb-be20-5b36c0edbbe2",
+    "name": "Broker API",
+    "description": "Alpaca Broker API consists of different APIs that help you build your investment services and products depending on your needs.\n\n| Environment   | URL                                        |\n| ------------- |:------------------------------------------:|\n| Sandbox       | https://broker-api.sandbox.alpaca.markets/ |\n| Production    | https://broker-api.alpaca.markets/         |\n\nFor complete documentation on the Broker API and to obtain your keys head to https://alpaca.markets/docs/broker/introduction/. Once you have your keys, head to the environments tab to quickly get started.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Account",
+          "_postman_id": "da62d365-6117-4dcb-a65a-e61a86d52dac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact\": {\n    \"email_address\": \"cool_alpaca@example.com\",\n    \"phone_number\": \"555-666-7788\",\n    \"street_address\": [\"20 N San Mateo Dr\"],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\",\n    \"country\": \"USA\"\n  },\n  \"identity\": {\n    \"given_name\": \"John\",\n    \"family_name\": \"Doe\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"tax_id\": \"666-55-4321\",\n    \"tax_id_type\": \"USA_SSN\",\n    \"country_of_citizenship\": \"USA\",\n    \"country_of_birth\": \"USA\",\n    \"country_of_tax_residence\": \"USA\",\n    \"funding_source\": [\"employment_income\"]\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"agreements\": [\n    {\n      \"agreement\": \"margin_agreement\",\n      \"signed_at\": \"2020-09-11T18:09:33Z\",\n      \"ip_address\": \"185.13.21.99\"\n    },\n    {\n      \"agreement\": \"account_agreement\",\n      \"signed_at\": \"2020-09-11T18:13:44Z\",\n      \"ip_address\": \"185.13.21.99\"\n    },\n    {\n      \"agreement\": \"customer_agreement\",\n      \"signed_at\": \"2020-09-11T18:13:44Z\",\n      \"ip_address\": \"185.13.21.99\"\n    }\n  ],\n  \"documents\": [\n    {\n      \"document_type\": \"identity_verification\",\n      \"document_sub_type\": \"passport\",\n      \"content\": \"QWxwYWNhcyBjYW5ub3QgbGl2ZSBhbG9uZS4=\",\n      \"mime_type\": \"image/jpeg\"\n    }\n  ],\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{HOST}}/v1/accounts",
+            "description": "| Attribute         | Requirement     |\n| -------------     |:-------------:  |\n| `contact`         | Required        |\n| `identity`        | Required        |\n| `disclosures`     | Required        |\n| `documents`       | Optional        |\n| `trusted_contact` | Optional        |"
+          },
+          "response": []
+        },
+        {
+          "name": "CIP Info",
+          "_postman_id": "50c993e7-f5bf-44e8-80fe-b6ee9fce62b7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider_name\": [\"onfido\"],\n  \"kyc\": {\n    \"id\": \"CBDAD1C4-1047-450E-BAE5-B6C406F509B4\",\n    \"risk_level\": \"LOW\",\n    \"applicant_name\": \"John Doe\",\n    \"email_address\": \"johndoe@example.com\",\n    \"nationality\": \"American\",\n    \"id_number\": \"jd0000123456789\",\n    \"date_of_birth\": \"1970-12-01\",\n    \"address\": \"42 Faux St\",\n    \"postal_code\": \"94401\",\n    \"country_of_residency\": \"USA\",\n    \"kyc_completed_at\": \"2021-06-10T15:37:03Z\",\n    \"ip_address\": \"127.0.0.1\",\n    \"check_initiated_at\": \"2021-06-10T15:37:03Z\",\n    \"check_completed_at\": \"2021-06-10T15:37:03Z\",\n    \"approval_status\": \"approved\",\n    \"approved_by\": \"Jane Doe\",\n    \"approved_at\": \"2021-06-10T15:38:03Z\"\n  },\n  \"document\": {\n    \"id\": \"55B9931A-3BE6-4BC0-9BDD-0B954E4A4632\",\n    \"result\": \"clear\",\n    \"status\": \"complete\",\n    \"created_at\": \"2021-06-10T15:37:03Z\",\n    \"image_integrity\": \"clear\"\n  },\n  \"photo\": {\n    \"id\": \"0DD13020-F0FD-4B5A-B58F-BC1885E90A6D\",\n    \"result\": \"clear\",\n    \"status\": \"complete\",\n    \"created_at\": \"2021-06-10T15:37:03Z\",\n    \"face_comparison\": \"clear\"\n  },\n  \"identity\": {\n    \"id\": \"28E1CCE8-1B1A-4472-9AD4-C6C5B7C3A6AF\",\n    \"result\": \"clear\",\n    \"status\": \"complete\",\n    \"created_at\": \"2021-06-10T15:37:03Z\",\n    \"sources\": \"clear\",\n    \"address\": \"clear\",\n    \"date_of_birth\": \"clear\"\n  },\n  \"watchlist\": {\n    \"id\": \"7572B870-EB4C-46A2-8B88-509194CCEE7E\",\n    \"result\": \"clear\",\n    \"status\": \"complete\",\n    \"created_at\": \"2021-06-10T15:37:03Z\",\n    \"politically_exposed_person\": \"clear\",\n    \"sanction\": \"clear\",\n    \"adverse_media\": \"clear\",\n    \"monitored_lists\": \"clear\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/cip",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "cip"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            },
+            "description": "| Attribute      | Requirement     |\n| ---------------|:-------------:  |\n| `provider`     | Optional        |\n| `kyc`          | Optional        |\n| `document`     | Optional        |\n| `photo`        | Optional        |\n| `identity`     | Optional        |\n| `watchlist`    | Optional        |"
+          },
+          "response": []
+        },
+        {
+          "name": "All Accounts",
+          "_postman_id": "c71172b0-8b8b-4b59-a822-99ca7c37d8d7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "John Doe",
+                  "description": "Pass space-delimited tokens. The response will contain accounts that match with each of the tokens (logical AND). A match means the token is present in either the account’s associated account number, phone number, name, or e-mail address (logical OR).",
+                  "disabled": true
+                },
+                {
+                  "key": "created_after",
+                  "value": "2021-09-09T0:00:00Z",
+                  "disabled": true
+                },
+                {
+                  "key": "created_before",
+                  "value": "2021-09-09T0:00:00Z",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "ACTIVE",
+                  "description": "ENUM.AccountStatus",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "asc",
+                  "description": "asc or desc. Defaults to desc",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "entities",
+                  "value": null,
+                  "description": "Comma-delimited entity names to include in the response",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Brokerage Account",
+          "_postman_id": "27515f61-0b43-4582-a5fb-dfc79b5b5039",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Trading Account",
+          "_postman_id": "f7186c67-a2e6-4b91-8b7e-2a6b6d759343",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/trading/accounts/:account_id/account",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "trading",
+                "accounts",
+                ":account_id",
+                "account"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Account",
+          "_postman_id": "87e0ad99-343b-4aca-ba42-dd2d122e82fc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact\": {\n    \"email_address\": \"cool_alpaca@example.com\",\n    \"phone_number\": \"555-666-7788\",\n    \"street_address\": [\"20 N San Mateo Dr\"],\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94401\"\n  },\n  \"identity\": {\n    \"funding_source\": [\"employment_income\"]\n  },\n  \"disclosures\": {\n    \"is_control_person\": false,\n    \"is_affiliated_exchange_or_finra\": false,\n    \"is_politically_exposed\": false,\n    \"immediate_family_exposed\": false\n  },\n  \"trusted_contact\": {\n    \"given_name\": \"Jane\",\n    \"family_name\": \"Doe\",\n    \"email_address\": \"jane.doe@example.com\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Account",
+          "_postman_id": "caec8113-0096-446a-8a7d-07b10896dad9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Account Activities",
+          "_postman_id": "c3d65a25-642c-49b7-932f-d62bf24e5574",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/activities",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                "activities"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2021-09-13",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported.",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-10",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported. Cannot be used with date.",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "2021-09-01",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported. Cannot be used with date.",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "direction",
+                  "value": "asc",
+                  "description": "Defaults to desc",
+                  "disabled": true
+                },
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "description": "string/UUID",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "page_size",
+                  "value": "1",
+                  "description": "The maximum number of entries to return in the response",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "page_token",
+                  "value": "1",
+                  "description": "The ID of the end of your current page of results",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Account Activities By Type",
+          "_postman_id": "ec56e92e-b022-4bdf-b939-3a8424033d6b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/activities/",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                "activities",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2021-09-13",
+                  "type": "text",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported.",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-10",
+                  "type": "text",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported. Cannot be used with date.",
+                  "disabled": true
+                },
+                {
+                  "key": "after",
+                  "value": "2021-09-01",
+                  "type": "text",
+                  "description": "Both formats YYYY-MM-DD and YYYY-MM-DDTHH:MM:SSZ supported. Cannot be used with date.",
+                  "disabled": true
+                },
+                {
+                  "key": "direction",
+                  "value": "asc",
+                  "type": "text",
+                  "description": "Defaults to desc",
+                  "disabled": true
+                },
+                {
+                  "key": "account_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "string/UUID",
+                  "disabled": true
+                },
+                {
+                  "key": "page_size",
+                  "value": "1",
+                  "type": "text",
+                  "description": "The maximum number of entries to return in the response",
+                  "disabled": true
+                },
+                {
+                  "key": "page_token",
+                  "value": "1",
+                  "type": "text",
+                  "description": "The ID of the end of your current page of results",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "3a59e987-6622-4139-b112-28baee638cc8",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/accounts/accounts/ to view complete documentation on the Accounts API."
+    },
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "All Assets",
+          "_postman_id": "5421000e-4a49-4c29-a4b5-9f8f50c4ac24",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/assets",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "assets"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "ACTIVE",
+                  "description": "Will default to all",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "asset_class",
+                  "value": null,
+                  "description": "String",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Asset by ID",
+          "_postman_id": "e7950704-f087-4da9-b573-b258ff597ba4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/assets/:asset_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "assets",
+                ":asset_id"
+              ],
+              "variable": [
+                {
+                  "key": "asset_id",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Asset by Symbol",
+          "_postman_id": "0a42d0f6-f3f3-4ba8-a9c0-cf7a0532d97c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/assets/:symbol",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "assets",
+                ":symbol"
+              ],
+              "variable": [
+                {
+                  "key": "symbol",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "92a27ce0-a611-4102-b68c-7b043890b200",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/assets/ to view complete documentation on the Assets API."
+    },
+    {
+      "name": "Calendar",
+      "item": [
+        {
+          "name": "Market Calendar",
+          "_postman_id": "5f23a6da-3580-4e89-8472-7f4a72985f96",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{HOST}}/v1/calendar"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "2a4d9468-6f2e-4c54-8b0e-4f101ec18fa4",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/calendar/ to view complete documentation on the Calendar API."
+    },
+    {
+      "name": "Clock",
+      "item": [
+        {
+          "name": "Clock",
+          "_postman_id": "8746aff8-b617-490d-9c16-0d2849b49a37",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{HOST}}/v1/clock"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "51459ca6-d13e-4d4c-b96e-be7212d12593",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/clock/ to view complete documentation on the Clock API."
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Document",
+          "_postman_id": "7d84db57-0a42-46a8-9e1d-ac5fe4eae5a7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"document_type\": \"cip_result\",\n    \"content\": \"VGhlcmUgYXJlIG5vIHdpbGQgYWxwYWNhcy4=\",\n    \"mime_type\": \"application/pdf\"\n  },\n  {\n    \"document_type\": \"identity_verification\",\n    \"document_sub_type\": \"passport\",\n    \"content\": \"QWxwYWNhcyBjYW5ub3QgbGl2ZSBhbG9uZS4=\",\n    \"mime_type\": \"image/jpeg\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/documents/upload",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "documents",
+                "upload"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            },
+            "description": "| Key               | Value                 | Requirement |\n|-------------------|-----------------------|:-----------:|\n| `document_upload` | models.DocumentUpload | Required    |"
+          },
+          "response": []
+        },
+        {
+          "name": "Documents for One Account",
+          "_postman_id": "733bc24f-f2ff-40f4-ad65-45c62dfbc9a3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/documents",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "documents"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2021-09-01",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "end",
+                  "value": "2021-09-13",
+                  "type": "text",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Download Document",
+          "_postman_id": "0a320924-135c-4fed-8bda-e2dc92fd688c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/documents/:document_id/download",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "documents",
+                ":document_id",
+                "download"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                },
+                {
+                  "key": "document_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Document by ID",
+          "_postman_id": "a6c954d7-abe0-44fd-b011-331ab6c8eef2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/documents/:document_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "documents",
+                ":document_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                },
+                {
+                  "key": "document_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "dabfb9bf-bd96-4e85-8c1c-1c59a492bd30",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/documents/ to view complete documentation on the Documents API."
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Account Status",
+          "_postman_id": "e2c3e90f-65db-42db-9daa-55f5f9c2515a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/events/accounts/status",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "accounts",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "since",
+                  "value": "2021-09-01",
+                  "description": "Format: YYYY-MM-DD",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-13",
+                  "description": "Format: YYYY-MM-DD",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "since_id",
+                  "value": null,
+                  "description": "Type: int",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "until_id",
+                  "value": null,
+                  "description": "Type: int",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Trade Updates",
+          "_postman_id": "72f1e7a3-39d7-4883-9129-970983fefdf3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/events/trades",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "trades"
+              ],
+              "query": [
+                {
+                  "key": "since",
+                  "value": "2021-09-01",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-13",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "since_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                },
+                {
+                  "key": "until_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Journal Status",
+          "_postman_id": "dc327143-fb88-4e93-a200-ba5ad993345c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/events/journals/status",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "journals",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "since",
+                  "value": "2021-09-01",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-13",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "since_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                },
+                {
+                  "key": "until_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Transfer Events",
+          "_postman_id": "39831153-69ad-4e67-b2d6-001ff0cc0a66",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/events/transfers/status",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "transfers",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "since",
+                  "value": "2021-09-01",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-13",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "since_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                },
+                {
+                  "key": "until_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Non Trading Activities Events",
+          "_postman_id": "6e983144-db77-4cc3-bc12-d8bc71572932",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/events/nta",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "nta"
+              ],
+              "query": [
+                {
+                  "key": "since",
+                  "value": "2021-09-01",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "until",
+                  "value": "2021-09-13",
+                  "type": "text",
+                  "description": "Format: YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "since_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                },
+                {
+                  "key": "until_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Type: int",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "67d5b283-efb1-427e-b0fe-e6b7d3bd3104",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/events/ to view complete documentation on the Events API."
+    },
+    {
+      "name": "ACH Relationships",
+      "item": [
+        {
+          "name": "ACH Relationship",
+          "_postman_id": "009ca28b-f8d0-4d6b-9364-73c96f164e39",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_owner_name\": \"Christie Ruales\",\n  \"bank_account_type\": \"CHECKING\",\n  \"bank_account_number\": \"01020304abc\",\n  \"bank_routing_number\": \"121000358\",\n  \"nickname\": \"Bank of America Checking\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/ach_relationships",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "ach_relationships"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            },
+            "description": "| Parameter             | Type   | Requirement | Notes             |\n| ----------------------|--------|-------------|:-----------------:|\n| `account_owner_name`  | string | Required    |                   |\n| `bank_account_type`   | string | Required    | Must be `CHECKINGS` or `SAVINGS` |\n| `bank_account_number` | string | Required    | In sandbox, this must be valid format |\n| `bank_routing_number` | string | Required    | In sandbox, this must be valid format                  |\n| `nickname`            | string | Optional    |                   |"
+          },
+          "response": []
+        },
+        {
+          "name": "ACH Relationships for Account",
+          "_postman_id": "42a201f3-7f1c-4343-b4fa-8d1a9804df63",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/ach_relationships",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "ach_relationships"
+              ],
+              "query": [
+                {
+                  "key": "statuses",
+                  "value": "PENDING,APPROVED",
+                  "description": "Multiple statuses (comma separated) are supported.",
+                  "type": "text",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ACH Relationship",
+          "_postman_id": "c5645683-167a-4831-abe6-424c60159e6f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/ach_relationships/:relationship_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "ach_relationships",
+                ":relationship_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                },
+                {
+                  "key": "relationship_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "d8b13f7b-257f-49a2-9989-a0405f181e3d",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/funding/ach/ to view complete documentation on the ACH Relationships API."
+    },
+    {
+      "name": "Banks",
+      "item": [
+        {
+          "name": "Bank Relationship",
+          "_postman_id": "cbb335a5-2c97-4998-bc96-20d6fa06955f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Bank XYZ\",\n  \"bank_code_type\": \"ABA\",\n  \"bank_code\": \"123456789\",\n  \"account_number\": \"123456789abc\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/recipient_banks",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "recipient_banks"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            },
+            "description": "| Parameter        | Type                | Requirement | Notes             |\n| -----------------|---------------------|-------------|:-----------------:|\n| `name`           | string              | Required    | Name of recipient bank |\n| `bank_code_type` | enum.IdentifierType | Required    | `ABA`(Domestic) or `BIC`(International) |\n| `bank_code`      | string              | Required    | 9-Digit ABA RTN (Routing Number or BIC |\n| `country`        | string              | Required    | Only for international banks |\n| `state_province` | string              | Required    | Only for international banks |\n| `postal_code`    | string              | Required    | Only for international banks |\n| `city`           | string              | Required    | Only for international banks |\n| street_address | string              | Required    | Only for international banks |\n| account_number | string              | Required    |                   |"
+          },
+          "response": []
+        },
+        {
+          "name": "Bank Details for Account",
+          "_postman_id": "90552061-f567-4e7c-b8ae-35d0ba3d76eb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/recipient_banks?status=ACTIVE",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "recipient_banks"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "ACTIVE",
+                  "description": "ACTIVE or INACTIVE"
+                },
+                {
+                  "key": "bank_name",
+                  "value": null,
+                  "description": "Type: string",
+                  "type": "text",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bank Relationship",
+          "_postman_id": "ec569f88-4a8e-4838-9cf5-c36c51aafd54",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/recipient_banks/:bank_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "recipient_banks",
+                ":bank_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                },
+                {
+                  "key": "bank_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "34ba374c-4c1e-4803-b233-2390679b35e7",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/funding/bank/ to view complete documentation on the Bank API."
+    },
+    {
+      "name": "Transfers",
+      "item": [
+        {
+          "name": "Transfer Entity",
+          "_postman_id": "cc390640-ae8d-4f51-9df0-9489a407eec4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transfer_type\": \"ach\",\n  \"relationship_id\": \"32788c82-9f9d-407c-8e77-c981ac74a1c9\",\n  \"amount\": \"500\",\n  \"direction\": \"INCOMING\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/transfers",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "transfers"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            },
+            "description": "| Parameter              | Type                   | Required                | Notes |\n|------------------------|------------------------|-------------------------|:-----:|\n| `transfer_type`          | ENUM.TransferType      | Required                | Sandbox currently only supports `ach` |\n| `relationship_id`        | string/UUID            | Required if `type = ach`  | The `ach_relationship` created for the `account_id` here |\n| `bank_id`                | string/UUID            | Required if `type = wire` | The `bank_relationship` created for the `account_id` here |\n| `amount`                 | string/decimal         | Required                | Must be > 0.00 |\n| `direction`              | ENUM.TransferDirection | Required                | |\n| `timing`                 | ENUM.TransferTiming    | Required                | Only `immediate` |\n| `additional_information` | string                 | Optional - Applies only to wires | Additional wire details |"
+          },
+          "response": []
+        },
+        {
+          "name": "Transfers By Account",
+          "_postman_id": "b0e33668-a1fe-43d9-93d6-33184ad9527f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/transfers",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "transfers"
+              ],
+              "query": [
+                {
+                  "key": "direction",
+                  "value": "INCOMING",
+                  "description": "Type: ENUM. INCOMING, OUTGOING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": null,
+                  "description": "Type: int",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "offset",
+                  "value": null,
+                  "description": "Type: int",
+                  "type": "text",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Transfer",
+          "_postman_id": "353161cd-013e-42b1-b914-a413ed4843fb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/accounts/:account_id/transfers/:transfer_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "accounts",
+                ":account_id",
+                "transfers",
+                ":transfer_id"
+              ],
+              "variable": [
+                {
+                  "key": "account_id",
+                  "value": null,
+                  "type": "any"
+                },
+                {
+                  "key": "transfer_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "baeb92b0-2593-4c9f-9312-c13f1d852032",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/funding/transfers/ to view complete documentation on the Transfers API."
+    },
+    {
+      "name": "Journals",
+      "item": [
+        {
+          "name": "Journal",
+          "_postman_id": "e40b6fab-546d-4e28-b082-39edab4a3b13",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_account\": \"7a9e91a4-ed56-44cf-8e10-f6c1aeed05d7\",\n  \"entry_type\": \"JNLC\",\n  \"to_account\": \"b8abc578-35ed-4bc0-bb55-6dc846f932eb\",\n  \"amount\": \"51\",\n  \"description\": \"test text /fixtures/status=rejected/fixtures/\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{HOST}}/v1/journals",
+            "description": "| Attribute                         | Type           | Requirement | Notes |\n|-----------------------------------|----------------|-------------|:-----:|\n| `to_account`                        | string         | Required    | The `account_id` you wish to journal to |\n| `from_account`                      | string         | Required    | the `account_id you` wish to journal from |\n| `entry_type`                        | string         | Required    | ENUM: `JNLC` or `JNLS` |\n| `amount`                            | string/numeric | Required    | Required if `entry_type = JNLC` |\n| `symbol`                            | string         | Required    | Required if `entry_type = JNLS` |\n| `qty`                               | string/numeric | Required    | Required if `entry_type = JNLS` |\n| `description`                       | string         | Optional    | Max 1024 characters. Can include fixtures for amounts that are above the transaction limit |\n| `transmitter_name`                  | string         | Optional    | Max 255 characters. See more details about Travel Rule. |\n| `transmitter_account_number`        | string         | Optional    | Max 255 characters. See more details about Travel Rule. |\n| `transmitter_address`               | string         | Optional    | Max 255 characters. See more details about Travel Rule. |\n| `transmitter_financial_institution` | string         | Optional    | Max 255 characters. See more details about Travel Rule. |\n| `transmitter_timestamp`             | string         | Optional    | RFC 3339 format. See more details about Travel Rule. |"
+          },
+          "response": []
+        },
+        {
+          "name": "Batch Journal Transaction",
+          "_postman_id": "413fa7ea-138e-4b88-92f9-7c12b1af71ee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entry_type\": \"JNLC\",\n  \"from_account\": \"7a9e91a4-ed56-44cf-8e10-f6c1aeed05d7\",\n  \"entries\": [\n    {\n      \"to_account\": \"b8abc578-35ed-4bc0-bb55-6dc846f932eb\",\n      \"amount\": \"10\"\n    },\n    {\n      \"to_account\": \"fce64594-8d8c-4cda-97d5-3f9cdafbf4ef\",\n      \"amount\": \"100\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{HOST}}/v1/journals/batch",
+            "description": "| Attribute      | Type          | Requirement                           | Notes                                                           |\n| -------------- | ------------- | ------------------------------------- | --------------------------------------------------------------- |\n| `entry_type`   | string        | Required | ENUM: `JNLC` or `JNLS`                                          |\n| `from_account` | string        | Required | The originator of funds. Most likely is your Sweep Firm Account |\n| `to_account`   | string        | Required | The ID of the `to_account` that you want to journal into        |\n| `amount`       | string/number | Required | Journal amount in `USD`                                         |\n| `description`  | string        | Optional | Journal description, gets returned in the response              |"
+          },
+          "response": []
+        },
+        {
+          "name": "Reverse Batch Journal Transaction",
+          "_postman_id": "2faedda4-7c6a-4984-af49-8dc050b24f17",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entry_type\": \"JNLC\",\n  \"to_account\": \"7a9e91a4-ed56-44cf-8e10-f6c1aeed05d7\",\n  \"entries\": [\n    { \"from_account\": \"b8abc578-35ed-4bc0-bb55-6dc846f932eb\", \"amount\": \"10\" },\n    { \"from_account\": \"fce64594-8d8c-4cda-97d5-3f9cdafbf4ef\", \"amount\": \"100\" }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{HOST}}/v1/journals/reverse_batch",
+            "description": "| Attribute      | Type          | Requirement                           | Notes                                                            |\n| -------------- | ------------- | ------------------------------------- | ---------------------------------------------------------------- |\n| `entry_type`   | string        | Required | ENUM: `JNLC` or `JNLS`                                           |\n| `to_account`   | string        | Required | The destination of funds. Most likely is your Sweep Firm Account |\n| `from_account` | string        | Required | The ID of the `from_account` that you want to journal from       |\n| `amount`       | string/number | Required | Journal amount in `USD`                                          |\n| `description`  | string        | Optional   | Journal description, gets returned in the response               |"
+          },
+          "response": []
+        },
+        {
+          "name": "Journal Entries",
+          "_postman_id": "74f47f57-6f09-48a9-ba22-02342eb65aa0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/journals",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "journals"
+              ],
+              "query": [
+                {
+                  "key": "after",
+                  "value": "2021-09-01",
+                  "description": "By journal creation date. Format: 2020-01-01",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "before",
+                  "value": "2021-09-13",
+                  "description": "By journal creation date. Format: 2020-01-01",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": null,
+                  "description": "ENUM.JournalStatus",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "entry_type",
+                  "value": null,
+                  "description": "The account that received the journal",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "to_account",
+                  "value": null,
+                  "description": "The account that received the journal",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "from_account",
+                  "value": null,
+                  "description": "The account that initiated the journal",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Journal",
+          "_postman_id": "e58f441a-81eb-4082-9397-0d99ece57c2f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "/v1/journals/:journal_id",
+              "path": [
+                "v1",
+                "journals",
+                ":journal_id"
+              ],
+              "variable": [
+                {
+                  "key": "journal_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "27859178-7186-43e0-bf68-fd4973c49d47",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/journals/ to view complete documentation on the Journals API."
+    },
+    {
+      "name": "OAuth",
+      "item": [
+        {
+          "name": "client_id",
+          "_postman_id": "6068881e-5c78-4003-aabd-7a54cd75cca9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"response_type\": \"token\",\n  \"redirect_uri\": \"www.example.com/oauth_redirect\",\n  \"scope\": \"general\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "/v1/oauth/clients/:client_id",
+              "path": [
+                "v1",
+                "oauth",
+                "clients",
+                ":client_id"
+              ],
+              "variable": [
+                {
+                  "key": "client_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            },
+            "description": "| Attribute         | Type   | Notes                                  |\n| ----------------- | ------ | -------------------------------------- |\n| `response_type`   | string | ENUM: `code` or `token`                |\n| `redirect_uri`    | string | Redirect URI of the OAuth flow         |\n| `scope`           | string | Requested scopes by the OAuth flow     |"
+          },
+          "response": []
+        },
+        {
+          "name": "OAuth Token",
+          "_postman_id": "e43d180f-b0f9-423c-9697-fe8b075a3b62",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"{client_secret}\",\n  \"redirect_uri\": \"www.example.com/oauth_redirect\",\n  \"scope\": \"general\",\n  \"account_id\": \"{account_id}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{HOST}}/v1/oauth/token",
+            "description": "| Attribute         | Type           | Requirement                           | Notes                          |\n| ----------------- | -------------- | ------------------------------------- | ------------------------------ |\n| `client_id`       | string         | Required | OAuth `client_id`                |\n| `client_secret`   | string         | Required | OAuth `client_secret`            |\n| `redirect_uri`    | string         | Required | Redirect URI of OAuth flow     |\n| `scope`           | string/numeric | Required | Requested scopes by OAuth flow |\n| `account_id`      | string         | Required | UUID of end user               |"
+          },
+          "response": []
+        },
+        {
+          "name": "Authorize an OAuth Token",
+          "_postman_id": "89bb1f7a-4684-497c-b2a6-c5479ba2d51e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"7a3c52a910e1dc2abbb14da2b6b8e711\",\n  \"client_secret\": \"{client_secret}\",\n  \"redirect_uri\": \"www.example.com/oauth_redirect\",\n  \"scope\": \"general\",\n  \"account_id\": \"{account_id}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{HOST}}/v1/oauth/authorize",
+            "description": "| Attribute         | Type           | Requirement                           | Notes                          |\n| ----------------- | -------------- | ------------------------------------- | ------------------------------ |\n| `client_id`       | string         | Required | OAuth `client_id`               |\n| `client_secret`   | string         | Required | OAuth `client_secret`            |\n| `redirect_uri`    | string         | Required | Redirect URI of OAuth flow     |\n| `scope`          | string/numeric | Required | Requested scopes by OAuth flow |\n| `account_id`      | string         | Required | UUID of end user               |"
+          },
+          "response": []
+        },
+        {
+          "name": "OAuth Token",
+          "_postman_id": "09a212bb-055b-45c7-b460-a09b68300c9d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{HOST}}/v1/oauth/token/:token_id",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "v1",
+                "oauth",
+                "token",
+                ":token_id"
+              ],
+              "variable": [
+                {
+                  "key": "token_id",
+                  "value": null,
+                  "type": "any"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "d81231bc-ee0f-49d5-bcac-a652225072b2",
+      "description": "Head to https://alpaca.markets/docs/broker/api-references/oauth/ to view complete documentation on the OAuth API."
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": {
+      "password": "{{api_secret}}",
+      "username": "{{api_key}}"
+    }
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "b82d1bc7-39b3-48fe-bc89-4b4a579a43b3",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "c482f26e-ae06-4459-b6d4-d737d5834653",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
