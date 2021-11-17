@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "11b77dd3-5389-4d60-ab11-e275235dbb5f",
-		"name": "Data v2 stocks API",
+		"_postman_id": "87773d6c-d09d-4171-85a9-73a6c7d85627",
+		"name": "Alpaca Stocks Data",
 		"description": "Get historical data on the U.S. stock market with the Data v2 stocks API. \n\n| Environment       | URL                            |\n| ----------------- |:------------------------------:|\n| Subscription/Free | https://data.alpaca.markets/v2 |\n\nHead to https://alpaca.markets/docs/api-documentation/api-v2/market-data/alpaca-data-api-v2/ to read the complete documentation.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -37,7 +37,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/stocks/:symbol/trades?start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+					"raw": "https://{{HOST}}/v2/stocks/:symbol/trades",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -52,12 +52,14 @@
 						{
 							"key": "start",
 							"value": "2020-04-01T0:00:00Z",
-							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "end",
 							"value": "2021-08-26T11:00:00Z",
-							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "feed",
@@ -120,7 +122,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/stocks/:symbol/quotes?start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+					"raw": "https://{{HOST}}/v2/stocks/:symbol/quotes",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -135,12 +137,14 @@
 						{
 							"key": "start",
 							"value": "2020-04-01T0:00:00Z",
-							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "end",
 							"value": "2021-08-26T11:00:00Z",
-							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "feed",
@@ -203,7 +207,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/stocks/:symbol/bars?start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z&timeframe=1Min",
+					"raw": "https://{{HOST}}/v2/stocks/:symbol/bars?timeframe=1Min",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -216,19 +220,21 @@
 					],
 					"query": [
 						{
+							"key": "timeframe",
+							"value": "1Min",
+							"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+						},
+						{
 							"key": "start",
 							"value": "2020-04-01T0:00:00Z",
-							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "end",
 							"value": "2021-08-26T11:00:00Z",
-							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-						},
-						{
-							"key": "timeframe",
-							"value": "1Min",
-							"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "feed",
@@ -330,7 +336,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/stocks/trades?symbols=AAPL,TSLA&start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+					"raw": "https://{{HOST}}/v2/stocks/trades?symbols=AAPL,TSLA",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -349,12 +355,14 @@
 						{
 							"key": "start",
 							"value": "2020-04-01T0:00:00Z",
-							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "end",
 							"value": "2021-08-26T11:00:00Z",
-							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "feed",
@@ -395,7 +403,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/stocks/quotes?symbols=AAPL,TSLA&start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+					"raw": "https://{{HOST}}/v2/stocks/quotes?symbols=AAPL,TSLA",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -414,12 +422,14 @@
 						{
 							"key": "start",
 							"value": "2020-04-01T0:00:00Z",
-							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "end",
 							"value": "2021-08-26T11:00:00Z",
-							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "feed",
@@ -460,7 +470,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/stocks/bars?symbols=AAPL,TSLA&start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z&timeframe=1Min",
+					"raw": "https://{{HOST}}/v2/stocks/bars?symbols=AAPL,TSLA&timeframe=1Min",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -477,19 +487,21 @@
 							"description": "The comma-separated symbols to query for"
 						},
 						{
+							"key": "timeframe",
+							"value": "1Min",
+							"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+						},
+						{
 							"key": "start",
 							"value": "2020-04-01T0:00:00Z",
-							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+							"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "end",
 							"value": "2021-08-26T11:00:00Z",
-							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-						},
-						{
-							"key": "timeframe",
-							"value": "1Min",
-							"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+							"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+							"disabled": true
 						},
 						{
 							"key": "feed",
@@ -704,13 +716,14 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/meta/conditions/:tickType?tape=A",
+					"raw": "https://{{HOST}}/v2/stocks/meta/conditions/:tickType?tape=A",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
 						"v2",
+						"stocks",
 						"meta",
 						"conditions",
 						":tickType"
@@ -750,13 +763,14 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v2/meta/exchanges",
+					"raw": "https://{{HOST}}/v2/stocks/meta/exchanges",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
 						"v2",
+						"stocks",
 						"meta",
 						"exchanges"
 					]
