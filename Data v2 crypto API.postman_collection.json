@@ -266,6 +266,52 @@
 			},
 			"response": []
 		},
+                {
+                    "name": "Snapshot",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Apca-Api-Key-Id",
+                                "value": "{{APCA_API_KEY_ID}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Apca-Api-Secret-Key",
+                                "value": "{{APCA_API_SECRET_KEY}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "https://{{HOST}}/v1beta1/crypto/:symbol/snapshot?exchange=CBSE",
+                            "protocol": "https",
+                            "host": [
+                                "{{HOST}}"
+                            ],
+                            "path": [
+                                "v1beta1",
+                                "crypto",
+                                ":symbol",
+                                "snapshot"
+                            ],
+                            "query": [
+                                {
+                                    "key": "exchange",
+                                    "value": "CBSE",
+                                    "description": "The exchange from which you'd like to query your data from"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "symbol",
+                                    "value": "BTCUSD",
+                                    "description": "The ticker representing the cryptocurrency you'd like the snapshot for"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
 		{
 			"name": "Multi Trades",
 			"request": {
