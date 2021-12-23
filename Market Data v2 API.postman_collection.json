@@ -1,0 +1,1343 @@
+{
+	"info": {
+		"_postman_id": "0e3aa9ba-8071-4def-b361-f78eb4a11e89",
+		"name": "Market Data v2 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Stock Pricing Data API",
+			"item": [
+				{
+					"name": "Bars",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/:symbol/bars?start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z&timeframe=1Min",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								":symbol",
+								"bars"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2020-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-08-26T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "timeframe",
+									"value": "1Min",
+									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								},
+								{
+									"key": "adjustment",
+									"value": "raw",
+									"description": "Specifies the corporate action adjustment for the stocks. Enum: ‘raw’, ‘split’, ‘dividend’ or ‘all’. Default value is ‘raw’.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "AAPL",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trades",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/:symbol/trades?start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								":symbol",
+								"trades"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2020-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-08-26T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "AAPL",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Snapshot",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/:symbol/snapshot",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								":symbol",
+								"snapshot"
+							],
+							"query": [
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "AAPL",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Quotes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/:symbol/quotes?start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								":symbol",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2020-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-08-26T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "AAPL",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Trades",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/trades?symbols=AAPL,TSLA&start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								"trades"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "AAPL,TSLA",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "start",
+									"value": "2020-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-08-26T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Quotes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/quotes?symbols=AAPL,TSLA&start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "AAPL,TSLA",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "start",
+									"value": "2020-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-08-26T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Bars",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/bars?symbols=AAPL,TSLA&start=2020-04-01T0:00:00Z&end=2021-08-26T11:00:00Z&timeframe=1Min",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								"bars"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "AAPL,TSLA",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "start",
+									"value": "2020-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-08-26T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "timeframe",
+									"value": "1Min",
+									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								},
+								{
+									"key": "adjustment",
+									"value": "raw",
+									"description": "Specifies the corporate action adjustment for the stocks. Enum: ‘raw’, ‘split’, ‘dividend’ or ‘all’. Default value is ‘raw’.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Snapshot",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/snapshots?symbols=AAPL,TSLA",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								"snapshots"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "AAPL,TSLA",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "feed",
+									"value": "sip",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest Trade",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/:symbol/trades/latest",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								":symbol",
+								"trades",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "AAPL",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest Quote",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/stocks/:symbol/quotes/latest",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"stocks",
+								":symbol",
+								"quotes",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "feed",
+									"value": "sip",
+									"description": "The data feed, defaults iex for free users and sip for users with a subscription.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "AAPL",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Meta Conditions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/meta/conditions/:tickType?tape=A",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"meta",
+								"conditions",
+								":tickType"
+							],
+							"query": [
+								{
+									"key": "tape",
+									"value": "A",
+									"description": "A, B, or C"
+								}
+							],
+							"variable": [
+								{
+									"key": "tickType",
+									"value": "trade",
+									"description": "trade or quote"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Meta Exchanges",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v2/meta/exchanges",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"meta",
+								"exchanges"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crypto Pricing Data API",
+			"item": [
+				{
+					"name": "Trades",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/:symbol/trades?start=2021-04-01T0:00:00Z&end=2021-09-10T11:00:00Z",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"trades"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bars",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/:symbol/bars?start=2021-04-01T0:00:00Z&end=2021-09-10T11:00:00Z&timeframe=1Min",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"bars"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "timeframe",
+									"value": "1Min",
+									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Quotes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/:symbol/quotes?start=2021-04-01T0:00:00Z&end=2021-09-10T11:00:00Z",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Bars",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/bars?symbols=BTCUSD,ETHUSD&start=2021-09-01T9:00:00Z&end=2021-09-10T10:00:00Z&timeframe=1Min",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"bars"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "BTCUSD,ETHUSD",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-09-01T9:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T10:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "timeframe",
+									"value": "1Min",
+									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest Trade",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"quotes",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "exchange",
+									"value": "ERSX",
+									"description": "One of the following exchanges: ERSX, GNSS or CBSE"
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest Quote",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"quotes",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "exchange",
+									"value": "ERSX",
+									"description": "One of the following exchanges: ERSX, GNSS or CBSE"
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest XBBO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/:symbol/xbbo/latest",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"xbbo",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: ERSX,GNSS",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News API",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Apca-Api-Key-Id",
+						"value": "{{APCA_API_KEY_ID}}",
+						"type": "text"
+					},
+					{
+						"key": "Apca-Api-Secret-Key",
+						"value": "{{APCA_API_SECRET_KEY}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{HOST}}/v1beta1/news?start=2021-01-01T00:00:00Z&end=2021-12-31T11:59:59Z&symbols=AAPL,TSLA,BTCUSD&limit=50&sort=DESC&include_content=true&exclude_contentless=true",
+					"protocol": "https",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1beta1",
+						"news"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2021-01-01T00:00:00Z",
+							"description": "(RFC 3339) Start date to start retrieving news articles"
+						},
+						{
+							"key": "end",
+							"value": "2021-12-31T11:59:59Z",
+							"description": "(RFC 3339) End date of period to retrieve news articles"
+						},
+						{
+							"key": "symbols",
+							"value": "AAPL,TSLA,BTCUSD",
+							"description": "List of symbols to retrive news"
+						},
+						{
+							"key": "limit",
+							"value": "50",
+							"description": "Limit of news items to be returned for given page"
+						},
+						{
+							"key": "sort",
+							"value": "DESC",
+							"description": "Sort articles by updated date. Options: DESC, ASC"
+						},
+						{
+							"key": "include_content",
+							"value": "true",
+							"description": "Boolean indicator to include content for news aritcles (if available)"
+						},
+						{
+							"key": "exclude_contentless",
+							"value": "true",
+							"description": "Boolean indicator to exclude news articles that do not contain content "
+						},
+						{
+							"key": "page_token",
+							"value": "",
+							"description": "Pagination token to continue on the next givne page",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
