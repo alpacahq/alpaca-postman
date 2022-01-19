@@ -1267,23 +1267,23 @@
 			]
 		},
 		{
-			"name": "News API",
+			"name": "Get News",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
-						"key": "Apca-Api-Key-Id",
+						"key": "APCA-API-KEY-ID",
 						"value": "{{APCA_API_KEY_ID}}",
 						"type": "text"
 					},
 					{
-						"key": "Apca-Api-Secret-Key",
+						"key": "APCA-API-SECRET-KEY",
 						"value": "{{APCA_API_SECRET_KEY}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://{{HOST}}/v1beta1/news?start=2021-01-01T00:00:00Z&end=2021-12-31T11:59:59Z&symbols=AAPL,TSLA,BTCUSD&limit=50&sort=DESC&include_content=true&exclude_contentless=true",
+					"raw": "https://{{HOST}}/v1beta1/news",
 					"protocol": "https",
 					"host": [
 						"{{HOST}}"
@@ -1295,38 +1295,45 @@
 					"query": [
 						{
 							"key": "start",
-							"value": "2021-01-01T00:00:00Z",
-							"description": "(RFC 3339) Start date to start retrieving news articles"
+							"value": "2015-01-01T00:00:00Z",
+							"description": "(RFC 3339) Start date to start retrieving news articles",
+							"disabled": true
 						},
 						{
 							"key": "end",
-							"value": "2021-12-31T11:59:59Z",
-							"description": "(RFC 3339) End date of period to retrieve news articles"
+							"value": "2015-12-31T11:59:59Z",
+							"description": "(RFC 3339) End date of period to retrieve news articles",
+							"disabled": true
 						},
 						{
 							"key": "symbols",
 							"value": "AAPL,TSLA,BTCUSD",
-							"description": "List of symbols to retrive news"
+							"description": "List of symbols to retrive news",
+							"disabled": true
 						},
 						{
 							"key": "limit",
 							"value": "50",
-							"description": "Limit of news items to be returned for given page"
+							"description": "Limit of news items to be returned for given page",
+							"disabled": true
 						},
 						{
 							"key": "sort",
-							"value": "DESC",
-							"description": "Sort articles by updated date. Options: DESC, ASC"
+							"value": "ASC",
+							"description": "Sort articles by updated date. Options: DESC, ASC",
+							"disabled": true
 						},
 						{
 							"key": "include_content",
 							"value": "true",
-							"description": "Boolean indicator to include content for news aritcles (if available)"
+							"description": "Boolean indicator to include content for news aritcles (if available)",
+							"disabled": true
 						},
 						{
 							"key": "exclude_contentless",
 							"value": "true",
-							"description": "Boolean indicator to exclude news articles that do not contain content "
+							"description": "Boolean indicator to exclude news articles that do not contain content ",
+							"disabled": true
 						},
 						{
 							"key": "page_token",
