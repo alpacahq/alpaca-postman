@@ -1263,6 +1263,174 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Multi Trades",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/trades?symbols=BTCUSD,ETHUSD",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"trades"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "BTCUSD,ETHUSD",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "start",
+									"value": "2021-09-01T9:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T10:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE,FTX",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS, CBSE or FTX. default: All",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Quotes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/quotes?symbols=BTCUSD,ETHUSD",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "BTCUSD,ETHUSD",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "start",
+									"value": "2021-09-01T9:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T10:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE,FTX",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS, CBSE or FTX. default: All",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Meta Spreads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/v1beta1/crypto/meta/spreads",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"meta",
+								"spreads"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
