@@ -179,7 +179,7 @@
 							"variable": [
 								{
 									"key": "account_id",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -366,6 +366,112 @@
 									"value": "1",
 									"description": "The ID of the end of your current page of results",
 									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CIP Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/v1/accounts/:account_id/cip",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								":account_id",
+								"cip"
+							],
+							"variable": [
+								{
+									"key": "account_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Onfido SDK token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/v1/accounts/:account_id/onfido/sdk/tokens/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								":account_id",
+								"onfido",
+								"sdk",
+								"tokens",
+								""
+							],
+							"query": [
+								{
+									"key": "referrer",
+									"value": "com.example.myapp",
+									"description": "The referrer URL of your web app or the application ID of your mobile app. If not passed in, will default to the * wildcard. Must be a URI encoded string",
+									"disabled": true
+								},
+								{
+									"key": "platform",
+									"value": "mobile",
+									"description": "Required if referrer provided. Accepted values are either mobile or web",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "account_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Onfido SDK Outcome",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"outcome\": \"USER_COMPLETED\",\n    \"token\": \"eyJhbGciOiJFUzUxMiJ9.eyJleHAiOjE2NDI1NTYyOTcsInBheWxvYWQiOnsiYXBwIjoiNGIyOGFjNTItOTA5Zi00ZDY4LWEyYWQtMmFlOThjNTM0ZTc1IiwiY2xpZW50X3V1aWQiOiJkOGU2NjI0NC00ODgwLTQyMzktODE1OS03NWIyOTZiYTgwMDgiLCJpc19zYW5kYm94Ijp0cnVlLCJyZWYiOiIqIiwic2FyZGluZV9zZXNzaW9uIjoiODU1ZDAwNTktZTc1Mi00YzNmLWIyMWItODgxMzJjYWExN2NmIn0sInV1aWQiOiJKcFFlZXdMRmhteSIsInVybHMiOnsidGVsZXBob255X3VybCI6Imh0dHBzOi8vdGVsZXBob255LnVzLm9uZmlkby5jb20iLCJkZXRlY3RfZG9jdW1lbnRfdXJsIjoiaHR0cHM6Ly9zZGsudXMub25maWRvLmNvbSIsInN5bmNfdXJsIjoiaHR0cHM6Ly9zeW5jLm9uZmlkby5jb20iLCJob3N0ZWRfc2RrX3VybCI6Imh0dHBzOi8vaWQub25maWRvLmNvbSIsImF1dGhfdXJsIjoiaHR0cHM6Ly9hcGkudXMub25maWRvLmNvbSIsIm9uZmlkb19hcGlfdXJsIjoiaHR0cHM6Ly9hcGkudXMub25maWRvLmNvbSJ9fQ.MIGHAkIBwuE3dqBrCAnfaAw1Ow4YBQ9ZFovZiV_C_K3wizyjRlK_21J2hCUZimgCjGViU1i0NO3rAqrRpnv3088OUsPuZd8CQScaPfu2Os6vxKrsIsfHhm6X4T78sCmuSw8-k6BaJSG1YBrMxhd3d9Mo4rvT6viyLfEIJaeA_SpFXTI7CHflrjHv\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v1/accounts/:account_id/onfido/sdk/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								":account_id",
+								"onfido",
+								"sdk",
+								""
+							],
+							"variable": [
+								{
+									"key": "account_id",
+									"value": null
 								}
 							]
 						}
@@ -1393,6 +1499,31 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Journal by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/v1/journals/:journal_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"journals",
+								":journal_id"
+							],
+							"variable": [
+								{
+									"key": "journal_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "Head to https://alpaca.markets/docs/broker/api-references/journals/ to view complete documentation on the Journals API."
@@ -1522,6 +1653,66 @@
 				}
 			],
 			"description": "Head to https://alpaca.markets/docs/broker/api-references/oauth/ to view complete documentation on the OAuth API."
+		},
+		{
+			"name": "Corporate Actions",
+			"item": [
+				{
+					"name": "Announcements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/v1/corporate_actions/announcements?ca_types=dividend,merger,spinoff,split&since=2021-12-01&until=2021-12-17",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"corporate_actions",
+								"announcements"
+							],
+							"query": [
+								{
+									"key": "ca_types",
+									"value": "dividend,merger,spinoff,split",
+									"description": "A comma-delimited list of ENUM.CorporateActionType values"
+								},
+								{
+									"key": "since",
+									"value": "2021-12-01",
+									"description": "The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+								},
+								{
+									"key": "until",
+									"value": "2021-12-17",
+									"description": "The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+								},
+								{
+									"key": "symbol",
+									"value": "",
+									"description": "The symbol of the company initiating the announcement.",
+									"disabled": true
+								},
+								{
+									"key": "cusip",
+									"value": "",
+									"description": "The CUSIP of the company initiating the announcement.",
+									"disabled": true
+								},
+								{
+									"key": "date_type",
+									"value": "",
+									"description": "ENUM.DateType. Potential values are declaration_date, ex_date, record_date, or payable_date",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Head to [https://alpaca.markets/docs/broker/api-references/corporate-actions/announcements/](https://alpaca.markets/docs/broker/api-references/corporate-actions/announcements/) to view complete documentation on the Corporate Actions API."
 		}
 	],
 	"auth": {
