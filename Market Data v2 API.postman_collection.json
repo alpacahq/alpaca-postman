@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a4eb06ec-3351-45ee-8eee-d3a9631556f5",
+		"_postman_id": "cc56cfc1-3633-49eb-a299-b8e822bcebcb",
 		"name": "Market Data v2 API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1449,6 +1449,48 @@
 									"key": "symbol",
 									"value": "BTCUSD",
 									"description": "The symbol of the cryptocurrency to query for."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Snapshots",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v1beta1/crypto/snapshots?exchange=CBSE&symbols=BTCUSD,ETHUSD",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"snapshots"
+							],
+							"query": [
+								{
+									"key": "exchange",
+									"value": "CBSE",
+									"description": "The exchange from which to query the data from."
+								},
+								{
+									"key": "symbols",
+									"value": "BTCUSD,ETHUSD",
+									"description": "The comma-separated symbols to query for."
 								}
 							]
 						}
