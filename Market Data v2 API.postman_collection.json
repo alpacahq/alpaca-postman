@@ -790,7 +790,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/:symbol/trades?start=2021-04-01T0:00:00Z&end=2021-09-10T11:00:00Z",
+							"raw": "{{HOST}}/v1beta1/crypto/:symbol/trades?start=2021-04-01T0:00:00Z",
 							"host": [
 								"{{HOST}}"
 							],
@@ -815,7 +815,8 @@
 								{
 									"key": "end",
 									"value": "2021-09-10T11:00:00Z",
-									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
 								},
 								{
 									"key": "limit",
@@ -835,259 +836,6 @@
 									"key": "symbol",
 									"value": "BTCUSD",
 									"description": "The symbol to query for"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Bars",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Apca-Api-Key-Id",
-								"value": "{{APCA_API_KEY_ID}}",
-								"type": "text"
-							},
-							{
-								"key": "Apca-Api-Secret-Key",
-								"value": "{{APCA_API_SECRET_KEY}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/:symbol/bars?start=2021-04-01T0:00:00Z&end=2021-09-10T11:00:00Z&timeframe=1Min",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"v1beta1",
-								"crypto",
-								":symbol",
-								"bars"
-							],
-							"query": [
-								{
-									"key": "exchanges",
-									"value": "ERSX,GNSS,CBSE",
-									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
-									"disabled": true
-								},
-								{
-									"key": "start",
-									"value": "2021-04-01T0:00:00Z",
-									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
-								},
-								{
-									"key": "end",
-									"value": "2021-09-10T11:00:00Z",
-									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-								},
-								{
-									"key": "timeframe",
-									"value": "1Min",
-									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
-								},
-								{
-									"key": "limit",
-									"value": "1000",
-									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
-									"disabled": true
-								},
-								{
-									"key": "page_token",
-									"value": "",
-									"description": "Pagination token to continue from.",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "symbol",
-									"value": "BTCUSD",
-									"description": "The symbol to query for"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Quotes",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Apca-Api-Key-Id",
-								"value": "{{APCA_API_KEY_ID}}",
-								"type": "text"
-							},
-							{
-								"key": "Apca-Api-Secret-Key",
-								"value": "{{APCA_API_SECRET_KEY}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/:symbol/quotes?start=2021-04-01T0:00:00Z&end=2021-09-10T11:00:00Z",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"v1beta1",
-								"crypto",
-								":symbol",
-								"quotes"
-							],
-							"query": [
-								{
-									"key": "exchanges",
-									"value": "ERSX,GNSS,CBSE",
-									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
-									"disabled": true
-								},
-								{
-									"key": "start",
-									"value": "2021-04-01T0:00:00Z",
-									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
-								},
-								{
-									"key": "end",
-									"value": "2021-09-10T11:00:00Z",
-									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-								},
-								{
-									"key": "limit",
-									"value": "1000",
-									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
-									"disabled": true
-								},
-								{
-									"key": "page_token",
-									"value": "",
-									"description": "Pagination token to continue from.",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "symbol",
-									"value": "BTCUSD",
-									"description": "The symbol to query for"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Multi Bars",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Apca-Api-Key-Id",
-								"value": "{{APCA_API_KEY_ID}}",
-								"type": "text"
-							},
-							{
-								"key": "Apca-Api-Secret-Key",
-								"value": "{{APCA_API_SECRET_KEY}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/bars?symbols=BTCUSD,ETHUSD&start=2021-09-01T9:00:00Z&end=2021-09-10T10:00:00Z&timeframe=1Min",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"v1beta1",
-								"crypto",
-								"bars"
-							],
-							"query": [
-								{
-									"key": "symbols",
-									"value": "BTCUSD,ETHUSD",
-									"description": "The comma-separated symbols to query for"
-								},
-								{
-									"key": "exchanges",
-									"value": "ERSX,GNSS",
-									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
-									"disabled": true
-								},
-								{
-									"key": "start",
-									"value": "2021-09-01T9:00:00Z",
-									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
-								},
-								{
-									"key": "end",
-									"value": "2021-09-10T10:00:00Z",
-									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted."
-								},
-								{
-									"key": "timeframe",
-									"value": "1Min",
-									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
-								},
-								{
-									"key": "limit",
-									"value": "1000",
-									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
-									"disabled": true
-								},
-								{
-									"key": "page_token",
-									"value": "",
-									"description": "Pagination token to continue from.",
-									"disabled": true
 								}
 							]
 						}
@@ -1125,7 +873,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
+							"raw": "{{HOST}}/v1beta1/crypto/:symbol/trades/latest?exchange=ERSX",
 							"host": [
 								"{{HOST}}"
 							],
@@ -1133,7 +881,7 @@
 								"v1beta1",
 								"crypto",
 								":symbol",
-								"quotes",
+								"trades",
 								"latest"
 							],
 							"query": [
@@ -1148,97 +896,6 @@
 									"key": "symbol",
 									"value": "BTCUSD",
 									"description": "The symbol to query for"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Latest Quote",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Apca-Api-Key-Id",
-								"value": "{{APCA_API_KEY_ID}}",
-								"type": "text"
-							},
-							{
-								"key": "Apca-Api-Secret-Key",
-								"value": "{{APCA_API_SECRET_KEY}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"v1beta1",
-								"crypto",
-								":symbol",
-								"quotes",
-								"latest"
-							],
-							"query": [
-								{
-									"key": "exchange",
-									"value": "ERSX",
-									"description": "One of the following exchanges: ERSX, GNSS or CBSE"
-								}
-							],
-							"variable": [
-								{
-									"key": "symbol",
-									"value": "BTCUSD"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Latest XBBO",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Apca-Api-Key-Id",
-								"value": "{{APCA_API_KEY_ID}}",
-								"type": "text"
-							},
-							{
-								"key": "Apca-Api-Secret-Key",
-								"value": "{{APCA_API_SECRET_KEY}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/:symbol/xbbo/latest",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"v1beta1",
-								"crypto",
-								":symbol",
-								"xbbo",
-								"latest"
-							],
-							"query": [
-								{
-									"key": "exchanges",
-									"value": "ERSX,GNSS,CBSE",
-									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: ERSX,GNSS",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "symbol",
-									"value": "BTCUSD"
 								}
 							]
 						}
@@ -1313,6 +970,134 @@
 					"response": []
 				},
 				{
+					"name": "Quotes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v1beta1/crypto/:symbol/quotes?start=2021-04-01T0:00:00Z",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest Quote",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v1beta1/crypto/:symbol/quotes/latest?exchange=ERSX",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"quotes",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "exchange",
+									"value": "ERSX",
+									"description": "One of the following exchanges: ERSX, GNSS or CBSE"
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Multi Quotes",
 					"request": {
 						"method": "GET",
@@ -1380,7 +1165,21 @@
 					"response": []
 				},
 				{
-					"name": "Meta Spreads",
+					"name": "Bars",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1396,15 +1195,144 @@
 							}
 						],
 						"url": {
-							"raw": "{{HOST}}/v1beta1/crypto/meta/spreads",
+							"raw": "{{HOST}}/v1beta1/crypto/:symbol/bars?start=2021-04-01T0:00:00Z&timeframe=1Min",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"v1beta1",
 								"crypto",
-								"meta",
-								"spreads"
+								":symbol",
+								"bars"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS,CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-04-01T0:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted."
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T11:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "timeframe",
+									"value": "1Min",
+									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD",
+									"description": "The symbol to query for"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multi Bars",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v1beta1/crypto/bars?symbols=BTCUSD,ETHUSD&timeframe=1Min",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"bars"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "BTCUSD,ETHUSD",
+									"description": "The comma-separated symbols to query for"
+								},
+								{
+									"key": "exchanges",
+									"value": "ERSX,GNSS",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: All",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "2021-09-01T9:00:00Z",
+									"description": "Filter data equal to or after this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-09-10T10:00:00Z",
+									"description": "Filter data equal to or before this time in RFC-3339 format. Fractions of a second are not accepted.",
+									"disabled": true
+								},
+								{
+									"key": "timeframe",
+									"value": "1Min",
+									"description": "Timeframe for the aggregation. Values are customizeable, frequently used examples: 1Min, 15Min, 1Hour, 1Day."
+								},
+								{
+									"key": "limit",
+									"value": "1000",
+									"description": "Number of data points to return. Must be in range 1-10000, defaults to 1000.",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "Pagination token to continue from.",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -1492,6 +1420,83 @@
 									"value": "BTCUSD,ETHUSD",
 									"description": "The comma-separated symbols to query for."
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Latest XBBO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v1beta1/crypto/:symbol/xbbo/latest",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								":symbol",
+								"xbbo",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "exchanges",
+									"value": "CBSE",
+									"description": "The comma-separated exchanges we query for: ERSX, GNSS or CBSE, default: ERSX,GNSS",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": "BTCUSD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Meta Spreads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v1beta1/crypto/meta/spreads",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1beta1",
+								"crypto",
+								"meta",
+								"spreads"
 							]
 						}
 					},
