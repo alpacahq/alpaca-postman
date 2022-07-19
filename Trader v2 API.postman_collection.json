@@ -10,7 +10,7 @@
 			"name": "Account",
 			"item": [
 				{
-					"name": "Get Account Information",
+					"name": "Account Information",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -477,10 +477,10 @@
 			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API."
 		},
 		{
-			"name": "Portfolio History",
+			"name": "Assets",
 			"item": [
 				{
-					"name": "Account Portfolio History",
+					"name": "All Assets",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -496,40 +496,118 @@
 							}
 						],
 						"url": {
-							"raw": "{{HOST}}/v2/account/portfolio/history",
+							"raw": "{{HOST}}/v2/assets",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"v2",
-								"account",
-								"portfolio",
-								"history"
+								"assets"
 							],
 							"query": [
 								{
-									"key": "period",
-									"value": "1D",
-									"description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M.",
+									"key": "status",
+									"value": null,
+									"description": "e.g. “active”. By default, all statuses are included.",
 									"disabled": true
 								},
 								{
-									"key": "timeframe",
-									"value": "15Min",
-									"description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.",
+									"key": "asset_class",
+									"value": null,
+									"description": "Defaults to us_equity.",
 									"disabled": true
 								},
 								{
-									"key": "date_end",
-									"value": "2021-09-14",
-									"description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)",
+									"key": "exchange",
+									"value": null,
+									"description": "AMEX, ARCA, BATS, NYSE, NASDAQ, NYSEARCA or OTC",
 									"disabled": true
 								},
 								{
-									"key": "extended_hours",
+									"key": null,
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/assets/:asset_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"assets",
+								":asset_id"
+							],
+							"variable": [
+								{
+									"key": "asset_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "| Attribute | Type   | Notes                             |\n| --------- | ------ | --------------------------------- |\n| `symbol`  | string | PATH - The `symbol` or `asset_id` |"
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by Symbol",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/assets/:symbol",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"assets",
+								":symbol"
+							],
+							"query": [
+								{
+									"key": "cancel_orders",
 									"value": "true",
-									"description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D.",
+									"description": "If true is specified, cancel all open orders before liquidating all positions.",
 									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "symbol",
+									"value": ""
 								}
 							]
 						}
@@ -537,7 +615,7 @@
 					"response": []
 				}
 			],
-			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API."
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API."
 		},
 		{
 			"name": "Watchlists",
@@ -983,6 +1061,215 @@
 			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation on the Watchlist API."
 		},
 		{
+			"name": "Calendar",
+			"item": [
+				{
+					"name": "Market Calendar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/calendar",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"calendar"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "",
+									"description": "The first date to retrieve data for (inclusive)",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "",
+									"description": "The last date to retrieve data for (inclusive)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clock",
+			"item": [
+				{
+					"name": "Market Clock",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/clock",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"clock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Corporate Actions Announcements",
+			"item": [
+				{
+					"name": "Announcements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/corporate_actions/announcements?ca_types=Dividend&since=2022-01-01&until=2022-01-02",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"corporate_actions",
+								"announcements"
+							],
+							"query": [
+								{
+									"key": "ca_types",
+									"value": "Dividend",
+									"description": "A comma-delimited list of Dividend, Merger, Spinoff, or Split."
+								},
+								{
+									"key": "since",
+									"value": "2022-01-01",
+									"description": "The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+								},
+								{
+									"key": "until",
+									"value": "2022-01-02",
+									"description": "The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+								},
+								{
+									"key": "symbol",
+									"value": null,
+									"description": "The symbol of the company initiating the announcement.",
+									"disabled": true
+								},
+								{
+									"key": "cusip",
+									"value": null,
+									"description": "The CUSIP of the company initiating the announcement.",
+									"disabled": true
+								},
+								{
+									"key": "date_type",
+									"value": null,
+									"description": "declaration_date, ex_date, record_date, or payable_date.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Announcement by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/corporate_actions/announcements/:announcement_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"corporate_actions",
+								"announcements",
+								":announcement_id"
+							],
+							"variable": [
+								{
+									"key": "announcement_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
 			"name": "Account Configurations",
 			"item": [
 				{
@@ -1214,10 +1501,10 @@
 			]
 		},
 		{
-			"name": "Calendar",
+			"name": "Portfolio History",
 			"item": [
 				{
-					"name": "Get the Market Calendar",
+					"name": "Account Portfolio History",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1233,25 +1520,39 @@
 							}
 						],
 						"url": {
-							"raw": "{{HOST}}/v2/calendar",
+							"raw": "{{HOST}}/v2/account/portfolio/history",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"v2",
-								"calendar"
+								"account",
+								"portfolio",
+								"history"
 							],
 							"query": [
 								{
-									"key": "start",
-									"value": "",
-									"description": "The first date to retrieve data for (inclusive)",
+									"key": "period",
+									"value": "1D",
+									"description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M.",
 									"disabled": true
 								},
 								{
-									"key": "end",
-									"value": "",
-									"description": "The last date to retrieve data for (inclusive)",
+									"key": "timeframe",
+									"value": "15Min",
+									"description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.",
+									"disabled": true
+								},
+								{
+									"key": "date_end",
+									"value": "2021-09-14",
+									"description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)",
+									"disabled": true
+								},
+								{
+									"key": "extended_hours",
+									"value": "true",
+									"description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D.",
 									"disabled": true
 								}
 							]
@@ -1259,41 +1560,8 @@
 					},
 					"response": []
 				}
-			]
-		},
-		{
-			"name": "Clock",
-			"item": [
-				{
-					"name": "Get the Market Clock",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Apca-Api-Key-Id",
-								"value": "{{APCA_API_KEY_ID}}",
-								"type": "text"
-							},
-							{
-								"key": "Apca-Api-Secret-Key",
-								"value": "{{APCA_API_SECRET_KEY}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{HOST}}/v2/clock",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"v2",
-								"clock"
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			],
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API."
 		}
 	],
 	"event": [
