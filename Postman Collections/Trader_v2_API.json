@@ -1,0 +1,1683 @@
+{
+	"info": {
+		"_postman_id": "b219fac1-0270-441b-b62c-5f4848233b8b",
+		"name": "Trader v2 API",
+		"description": "Alpaca's Trading API is a modern platform for algorithmic trading.\n\n| Environment   | URL                              |\n| ------------- |:--------------------------------:|\n| Paper         | https://paper-api.alpaca.markets |\n| Production    | https://api.alpaca.markets       |\n\n\nFor complete documentation on the Trading API and to obtain your keys head to https://alpaca.markets/docs/api-documentation/api-v2/. Once you have your keys, head to the environments tab to quickly get started.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Account Information",
+					"_postman_id": "cd2e308d-c54f-4bdd-9309-a50496912258",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": "{{HOST}}/v2/account"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "f696167b-65b8-4c80-86c0-87164e34cf00"
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "All Orders",
+					"_postman_id": "d59d4df0-3b86-444b-9832-55820c74643a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "open",
+									"description": "Order status to be queried. open, closed or all. Defaults to open.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "50",
+									"description": "The maximum number of orders in response. Defaults to 50 and max is 500.",
+									"disabled": true
+								},
+								{
+									"key": "after",
+									"value": "",
+									"description": "The response will include only ones submitted after this timestamp (exclusive.)",
+									"disabled": true
+								},
+								{
+									"key": "until",
+									"value": "",
+									"description": "The response will include only ones submitted until this timestamp (exclusive.)",
+									"disabled": true
+								},
+								{
+									"key": "direction",
+									"value": "desc",
+									"description": "The chronological order of response based on the submission time. asc or desc. Defaults to desc.",
+									"disabled": true
+								},
+								{
+									"key": "nested",
+									"value": "true",
+									"description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+									"disabled": true
+								},
+								{
+									"key": "symbols",
+									"value": "",
+									"description": "A comma-separated list of symbols to filter by (ex. “AAPL,TSLA,MSFT”). A currency pair is required for crypto orders (ex. “BTCUSD,BCHUSD,LTCUSD,ETCUSD”).",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order",
+					"_postman_id": "6fa4dcbe-68bf-4d37-b867-5a7df91642e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"TSLA\",\n  \"qty\": \"2.5\",\n  \"side\": \"buy\",\n  \"type\": \"market\",\n  \"time_in_force\": \"day\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/v2/orders",
+						"description": "| Attribute         | Type           | Requirement                           | Notes                                                                                                                                              |\n| ----------------- | -------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `symbol`          | string         | Required | Symbol or asset ID to identify the asset to trade                                                                                                  |\n| `qty`             | string/number  | Required | Number of shares to trade. Can be fractionable for only `market` and `day` order types.                                                            |\n| `notional`        | string/number  | Required | Dollar amount to trade. Cannot work with `qty`. Can only work for `market` order types and `time_in_force = day`.                                  |\n| `side`            | string         | Required | `buy` or `sell`                                                                                                                                    |\n| `type`            | string         | Required | `market`, `limit`, `stop`, `stop_limit`, or `trailing_stop`                                                                                        |\n| `time_in_force`   | string/number  | Required | `day`, `gtc`, `opg`, `cls`, `ioc`, `fok`. Please see Understand Orders for more info.                                                              |\n| `limit_price`     | string/number  | Optional  | Required if type is `limit` or `stop_limit`                                                                           |\n| `stop_price`      | string/number  | Optional | Required if type is `stop` or `stop_limit`                                                                            |\n| `trail_price`     | string/number  | Optional | Required if type is `trailing_stop`, `trail_price` or `trail_percent` is required                                     |\n| `trail_percent`   | string/number  | Optional  | Required if type is `trailing_stop`, `trail_price` or `trail_percent` is required                                     |\n| `extended_hours`  | string         | Optional | Defaults to `false`. If `true`, order will be eligible to execute in premarket/afterhours. Only works with type `limit` and `time_in_force = day`. |\n| `client_order_id` | string/UUID    | Optional | A unique identifier for the order. Automatically generated if not sent. (<= 48 characters)                                                         |\n| `order_class`     | string/numeric | Optional | `simple`, `bracket`, `oco` or `oto`. For details of non-simple order classes, please see Bracket Order Overview                                    |\n| `take_profit`     | object         | Optional | Takes in a string/number value for `limit_price`                                                                                                   |\n| `stop_loss`       | object         | Optional | Takes in a string/number values for `stop_price` and `limit_price`                                                                                 |\n| `commission`      | string/numeric | Optional | The commission you want to collect from the user. |"
+					},
+					"response": []
+				},
+				{
+					"name": "Order by Order ID",
+					"_postman_id": "ca0a3775-07b3-4608-944b-3ef9c2b4b492",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":order_id"
+							],
+							"query": [
+								{
+									"key": "nested",
+									"value": "true",
+									"description": "If true, the result will roll up multi-leg orders under the legs field of primary order.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"id": "29cfd955-ac90-49d4-b261-c2842e08085a",
+									"key": "order_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order",
+					"_postman_id": "c24bfec9-eee5-4cc4-b711-e62675811bdb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"qty\": \"2\",\n  \"time_in_force\": \"day\",\n  \"client_order_id\": \"{{client_order_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":order_id"
+							],
+							"variable": [
+								{
+									"id": "3e476bcf-ad28-4aa9-bc99-f8ff1a80eb83",
+									"key": "order_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"description": "| Attribute         | Type          | Notes                                                 |\n| ----------------- | ------------- | ----------------------------------------------------- |\n| `qty`             | string/int    | You can only patch full shares for now                |\n| `time_in_force`   | string/number | Can be `day`, `gtc`, `opg`, `cls`, `ioc` or `fok`     |\n| `limit_price`     | string/number | Required if `type` = `limit` or `stop_limit`          |\n| `stop_price`      | string/number | Required if `type` = `stop` or `stop_limit`           |\n| `trail`           | string/number | The new value of the `trail_price` or `trail_percent` |\n| `client_order_id` | string/UUID   |                                                       |"
+					},
+					"response": []
+				},
+				{
+					"name": "All Orders",
+					"_postman_id": "0a26fdde-6b9a-452e-82fc-147cb57b594e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": "{{HOST}}/v2/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "Order by Order ID",
+					"_postman_id": "60b162ae-0eb3-4fc0-9429-a8d1af8d2f38",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/orders/:order_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"orders",
+								":order_id"
+							],
+							"variable": [
+								{
+									"id": "790c15d6-6bc6-437a-9ce7-0643eb030cbb",
+									"key": "order_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "e051c606-8354-49a1-a2c2-b7d08aee03e7",
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/orders/ to view complete documentation on the Orders API."
+		},
+		{
+			"name": "Positions",
+			"item": [
+				{
+					"name": "All Open Positions",
+					"_postman_id": "6b5baff1-c0b5-43ae-8346-934eaa65f564",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": "{{HOST}}/v2/positions"
+					},
+					"response": []
+				},
+				{
+					"name": "Open Position",
+					"_postman_id": "d4892d87-1b85-4e80-a759-e38e318982a3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions/:symbol_or_asset_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions",
+								":symbol_or_asset_id"
+							],
+							"variable": [
+								{
+									"id": "edb24499-39ae-4830-8ab5-d3a9ec98578a",
+									"key": "symbol_or_asset_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"description": "| Attribute | Type   | Notes                             |\n| --------- | ------ | --------------------------------- |\n| `symbol`  | string | PATH - The `symbol` or `asset_id` |"
+					},
+					"response": []
+				},
+				{
+					"name": "All Positions",
+					"_postman_id": "1ab14686-f7e5-4a5e-a5c1-b0c630016875",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions"
+							],
+							"query": [
+								{
+									"key": "cancel_orders",
+									"value": "true",
+									"description": "If true is specified, cancel all open orders before liquidating all positions.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Position",
+					"_postman_id": "553ef5d9-b930-42f7-a0b1-a287214da5f0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/positions/:symbol_or_asset_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"positions",
+								":symbol_or_asset_id"
+							],
+							"query": [
+								{
+									"key": "qty",
+									"value": "",
+									"description": "The number of shares to liquidate. Can accept up to 9 decimal points. Cannot work with percentages",
+									"disabled": true
+								},
+								{
+									"key": "percentage",
+									"value": "",
+									"description": "Percentage of position to liquidate. Must be between 0 and 100. Would only sell fractional if position is originally fractional. Can accept up to 9 decimal points. Cannot work with qty",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"id": "6f422cc6-c071-45b9-8f9a-a1c54bc1d5d6",
+									"key": "symbol_or_asset_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "cf257e47-4ece-4e36-ba37-88b8f9040d15",
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API."
+		},
+		{
+			"name": "Assets",
+			"item": [
+				{
+					"name": "All Assets",
+					"_postman_id": "cc1d69fb-ef6c-4687-83c1-8673bc0f947e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/assets",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"assets"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "",
+									"description": "e.g. “active”. By default, all statuses are included.",
+									"disabled": true
+								},
+								{
+									"key": "asset_class",
+									"value": "",
+									"description": "Defaults to us_equity.",
+									"disabled": true
+								},
+								{
+									"key": "exchange",
+									"value": "",
+									"description": "AMEX, ARCA, BATS, NYSE, NASDAQ, NYSEARCA or OTC",
+									"disabled": true
+								},
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by ID",
+					"_postman_id": "9bd2a258-2042-499e-a2c3-412c428b5d8a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/assets/:asset_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"assets",
+								":asset_id"
+							],
+							"variable": [
+								{
+									"id": "ca67e10f-2dca-43d4-96dc-0047d81c8c36",
+									"key": "asset_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"description": "| Attribute | Type   | Notes                             |\n| --------- | ------ | --------------------------------- |\n| `symbol`  | string | PATH - The `symbol` or `asset_id` |"
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by Symbol",
+					"_postman_id": "3fa19453-432d-4b64-a2ff-5dd5f5c0e5a7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/assets/:symbol",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"assets",
+								":symbol"
+							],
+							"query": [
+								{
+									"key": "cancel_orders",
+									"value": "true",
+									"description": "If true is specified, cancel all open orders before liquidating all positions.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"id": "a9f22a9e-4872-462a-85a4-fb05c10f3ff0",
+									"key": "symbol",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "bcb59ccf-dfb8-48bd-8fe6-d56c160b07ae",
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/positions/ to view complete documentation on the Positions API."
+		},
+		{
+			"name": "Watchlists",
+			"item": [
+				{
+					"name": "Watchlists",
+					"_postman_id": "66522a7c-30b5-44f4-8abe-9b900a02f18f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": "{{HOST}}/v2/watchlists"
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist",
+					"_postman_id": "8e3ea804-8548-4f2e-8ec0-3577f46686ff",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Big Tech\",\n  \"symbols\": [\"AAPL\",\"GOOGL\",\"META\",\"AMZN\",\"NFLX\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/v2/watchlists",
+						"description": "| Parameter   | Type          | Requirement |\n|-------------|---------------|:-----------:|\n| `name`      | string        | Required    |\n| `symbols`   | array[string] | Optional    |"
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist by ID",
+					"_postman_id": "8e4c8be8-a526-45e0-a5eb-039a9db50234",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"id": "277247a8-a18b-4aa6-8d09-adcda5e1f009",
+									"key": "watchlist_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist by Name",
+					"_postman_id": "12b9b79f-2763-43a8-b30e-0b7ba7d56ddb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists:by_name",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists:by_name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"description": "name of the watchlist",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset to Watchlist by ID",
+					"_postman_id": "6013dff4-8397-498d-888e-ca5651883433",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"DIS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"id": "fce785fd-68ed-4ecb-bf91-17ae81d7810e",
+									"key": "watchlist_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset to Watchlist by Name",
+					"_postman_id": "d874931e-123b-40a9-8e08-a6cd8b66a8fc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"TDOC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists:by_name",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists:by_name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"description": "name of the watchlist",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Watchlist by ID",
+					"_postman_id": "9efc6149-a196-4630-871a-293ab23068f0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Newer Watchlist\",\n  \"symbols\": [\"GOOG\",\"TSLA\",\"META\",\"MSFT\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"id": "15d7634d-6db8-4cbc-9897-dc1cfae36ff6",
+									"key": "watchlist_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Watchlist by Name",
+					"_postman_id": "eb876c76-c322-4cfd-b803-b1ec5921a61b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Best\",\n  \"symbols\": [\"TSLA\",\"SHOP\",\"TDOC\",\"PTON\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists:by_name",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists:by_name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"description": "name of the watchlist",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist by ID",
+					"_postman_id": "073a46b0-d1fb-4316-8bbd-90b9015bf85e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id"
+							],
+							"variable": [
+								{
+									"id": "3d4129e6-7b4a-4b9d-9f60-de95cace2e98",
+									"key": "watchlist_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist by Name",
+					"_postman_id": "10aa139b-11d1-4541-92f4-4e333a3455c6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists:by_name",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists:by_name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"description": "name of the watchlist",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Symbol from Watchlist",
+					"_postman_id": "6d3cbc57-a48d-4dde-af1e-57bd9c170a00",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/watchlists/:watchlist_id/:symbol",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"watchlists",
+								":watchlist_id",
+								":symbol"
+							],
+							"variable": [
+								{
+									"id": "2ae8cdd2-fc4a-4c65-98ad-1f3f6b7773fb",
+									"key": "watchlist_id",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"id": "9eb920bc-af87-4004-bb74-b3725cae91a9",
+									"key": "symbol",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "ffd846bd-cd5a-4d7c-96e0-1dc3a790bc33",
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/watchlist/ to view complete documentation on the Watchlist API."
+		},
+		{
+			"name": "Calendar",
+			"item": [
+				{
+					"name": "Market Calendar",
+					"_postman_id": "3ce25d81-0192-414e-a34b-73c508a5b827",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/calendar",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"calendar"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "",
+									"description": "The first date to retrieve data for (inclusive)",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "",
+									"description": "The last date to retrieve data for (inclusive)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "c69e90bc-f33e-4248-88a2-1d15d8f3e908"
+		},
+		{
+			"name": "Clock",
+			"item": [
+				{
+					"name": "Market Clock",
+					"_postman_id": "4d19dc01-7b79-4005-9b64-90d8fe1e675c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": "{{HOST}}/v2/clock"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "0e746dee-7e14-4ead-ba7d-0e11a63e86e7"
+		},
+		{
+			"name": "Corporate Actions Announcements",
+			"item": [
+				{
+					"name": "Announcements",
+					"_postman_id": "bc846d4f-abf9-4161-a328-aee523c44cae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/corporate_actions/announcements?ca_types=Dividend&since=2022-01-01&until=2022-01-02",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"corporate_actions",
+								"announcements"
+							],
+							"query": [
+								{
+									"key": "ca_types",
+									"value": "Dividend",
+									"description": "A comma-delimited list of Dividend, Merger, Spinoff, or Split."
+								},
+								{
+									"key": "since",
+									"value": "2022-01-01",
+									"description": "The start (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+								},
+								{
+									"key": "until",
+									"value": "2022-01-02",
+									"description": "The end (inclusive) of the date range when searching corporate action announcements. This should follow the YYYY-MM-DD format. The date range is limited to 90 days."
+								},
+								{
+									"key": "symbol",
+									"value": "",
+									"description": "The symbol of the company initiating the announcement.",
+									"disabled": true
+								},
+								{
+									"key": "cusip",
+									"value": "",
+									"description": "The CUSIP of the company initiating the announcement.",
+									"disabled": true
+								},
+								{
+									"key": "date_type",
+									"value": "",
+									"description": "declaration_date, ex_date, record_date, or payable_date.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Announcement by ID",
+					"_postman_id": "bc27ee18-c0db-4d1b-bea6-ddb39b15dcbb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/corporate_actions/announcements/:announcement_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"corporate_actions",
+								"announcements",
+								":announcement_id"
+							],
+							"variable": [
+								{
+									"id": "9d76bb48-ff2a-4430-8b33-be6f6b3202b0",
+									"key": "announcement_id",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "273b28c0-3f5d-4e37-906e-ca9da923f529",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "1212a24f-54a5-475f-a0a7-8087192b8d97"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "a575c015-df42-4c6b-9c7f-6a2724a4abbe"
+					}
+				}
+			]
+		},
+		{
+			"name": "Account Configurations",
+			"item": [
+				{
+					"name": "Account Configurations",
+					"_postman_id": "a88f49a8-70a0-4de7-a329-90d9a3fea2f1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/v2/account/configurations"
+					},
+					"response": []
+				},
+				{
+					"name": "Account Configurations",
+					"_postman_id": "4583fae2-9e39-4b00-956a-6960fb918b50",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dtbp_check\": \"entry\",\n    \"fractional_trading\": true,\n    \"max_margin_multiplier\": \"4\",\n    \"no_shorting\": false,\n    \"pdt_check\": \"entry\",\n    \"suspend_trade\": false,\n    \"trade_confirm_email\": \"all\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/v2/account/configurations"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "34d964cc-d728-4cf4-99e9-1c99058ee395",
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/account-configuration/ to view complete documentation on the Account Configurations API."
+		},
+		{
+			"name": "Account Activities",
+			"item": [
+				{
+					"name": "Account Activities",
+					"_postman_id": "b9099c3b-6a12-4221-b997-b25db75f66e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/account/activities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"account",
+								"activities"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "",
+									"description": "The date for which you want to see activities.",
+									"disabled": true
+								},
+								{
+									"key": "until",
+									"value": "",
+									"description": "The response will contain only activities submitted before this date. (Cannot be used with date.)",
+									"disabled": true
+								},
+								{
+									"key": "after",
+									"value": "",
+									"description": "The response will contain only activities submitted after this date. (Cannot be used with date.)",
+									"disabled": true
+								},
+								{
+									"key": "direction",
+									"value": "desc",
+									"description": "asc or desc (default desc if unspecified.)",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "",
+									"description": "The maximum number of entries to return in the response. (See the section on paging above.)",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "The ID of the end of your current page of results. ",
+									"disabled": true
+								},
+								{
+									"key": "activity_types",
+									"value": "",
+									"description": "A comma-separated list of the activity types to include in the response. If unspecified, activities of all types will be returned. See ActivityType model for values",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Activities of One Type",
+					"_postman_id": "083ccf15-8cdd-42ff-a126-eedecd025c1f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/account/activities/:activity_type",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"account",
+								"activities",
+								":activity_type"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "",
+									"description": "The date for which you want to see activities.",
+									"disabled": true
+								},
+								{
+									"key": "until",
+									"value": "",
+									"description": "The response will contain only activities submitted before this date. (Cannot be used with date.)",
+									"disabled": true
+								},
+								{
+									"key": "after",
+									"value": "",
+									"description": "The response will contain only activities submitted after this date. (Cannot be used with date.)",
+									"disabled": true
+								},
+								{
+									"key": "direction",
+									"value": "desc",
+									"description": "asc or desc (default desc if unspecified.)",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "",
+									"description": "The maximum number of entries to return in the response. (See the section on paging above.)",
+									"disabled": true
+								},
+								{
+									"key": "page_token",
+									"value": "",
+									"description": "The ID of the end of your current page of results. ",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"id": "571401ad-79fa-49f6-a171-c691430e3142",
+									"key": "activity_type",
+									"value": "",
+									"description": "The activity type you want to view entries for. E.g., FILL, TRANS, MISC.",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "0ef164f8-4850-4164-bf00-3650397e23a2"
+		},
+		{
+			"name": "Portfolio History",
+			"item": [
+				{
+					"name": "Account Portfolio History",
+					"_postman_id": "a8076596-c601-41fb-8f34-6f2b4ebc4d6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Apca-Api-Key-Id",
+								"value": "{{APCA_API_KEY_ID}}",
+								"type": "text"
+							},
+							{
+								"key": "Apca-Api-Secret-Key",
+								"value": "{{APCA_API_SECRET_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/v2/account/portfolio/history",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v2",
+								"account",
+								"portfolio",
+								"history"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "1D",
+									"description": "The duration of the data in <number> + <unit>, such as 1D, where <unit> can be D for day, W for week, M for month and A for year. Defaults to 1M.",
+									"disabled": true
+								},
+								{
+									"key": "timeframe",
+									"value": "15Min",
+									"description": "The resolution of time window. 1Min, 5Min, 15Min, 1H, or 1D. If omitted, 1Min for less than 7 days period, 15Min for less than 30 days, or otherwise 1D.",
+									"disabled": true
+								},
+								{
+									"key": "date_end",
+									"value": "2021-09-14",
+									"description": "The date the data is returned up to, in “YYYY-MM-DD” format. Defaults to the current market date (rolls over at the market open if extended_hours is false, otherwise at 7am ET)",
+									"disabled": true
+								},
+								{
+									"key": "extended_hours",
+									"value": "true",
+									"description": "If true, include extended hours in the result. This is effective only for timeframe less than 1D.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "855f1e79-409d-4cf9-8f96-8c0e9c3fbb25",
+			"description": "Head to https://alpaca.markets/docs/api-documentation/api-v2/portfolio-history/ to view complete documentation on the Portfolio History API."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "de57e403-e66c-451a-bf37-f98b99ff7820"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "91324a13-6122-458e-857a-91bd340eff71"
+			}
+		}
+	]
+}
