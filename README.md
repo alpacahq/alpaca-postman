@@ -2,7 +2,7 @@
 Postman collections for Alpaca's APIs can be found in a public workspace located [here](https://www.postman.com/alpacamarkets).
 
 ## Alpaca Postman Collections
-There are Postman collections for the [Data](https://alpaca.markets/docs/api-documentation/api-v2/market-data/), [Trader](https://alpaca.markets/docs/api-documentation/api-v2/), and [Broker](https://alpaca.markets/docs/broker/api-overview/) APIs. 
+There are Postman collections for the [Data](https://docs.alpaca.markets/docs/about-market-data-api), [Trader](https://docs.alpaca.markets/docs/trading-api), and [Broker](https://docs.alpaca.markets/docs/about-broker-api) APIs. 
 
 ## Getting Started
 To demonstrate how to get started, let's walk through the Broker API collection.
@@ -19,7 +19,7 @@ You can fork the example environment as well. Name your fork and select the same
 
 <img width="350" src="https://user-images.githubusercontent.com/24945583/134991391-02b2fe26-c62e-43af-8743-97847c788476.png">
 
-Get your API keys from [here](https://alpaca.markets/docs/broker/api-overview/). Upon creating an account you will be prompted to generate your keys. Be sure to store your api_key and api_secret somewhere private. Once you have your keys, head to the workspace where you forked your collection and environment. Keep in mind, this sample environment already has the host value for a sandbox account. If you would like to work in a production environment you will need to change the host URL and obtain the correct api keys for a production account. To continue with the sandbox environment, simply enter your api_key and api_secret in their respective place. Once you enter your keys, select this environment in the upper right corner as pictured below. 
+Get your API keys from [here](https://broker-app.alpaca.markets/sign-up). Upon creating an account you will be prompted to generate your keys. Be sure to store your api_key and api_secret somewhere private. Once you have your keys, head to the workspace where you forked your collection and environment. Keep in mind, this sample environment already has the host value for a sandbox account. If you would like to work in a production environment you will need to change the host URL and obtain the correct api keys for a production account. To continue with the sandbox environment, simply enter your api_key and api_secret in their respective place. Once you enter your keys, select this environment in the upper right corner as pictured below. 
 
 <img width="902" src="https://user-images.githubusercontent.com/24945583/134991535-0c946383-fbe9-4f4c-97c3-c1511813df2d.png">
 
