@@ -21,7 +21,7 @@ You can fork the example environment as well. Name your fork and select the same
 
 Get your API keys from [here](https://broker-app.alpaca.markets/sign-up). Upon creating an account you will be prompted to generate your keys. Be sure to store your api_key and api_secret somewhere private. Once you have your keys, head to the workspace where you forked your collection and environment. Keep in mind, this sample environment already has the host value for a sandbox account. If you would like to work in a production environment you will need to change the host URL and obtain the correct api keys for a production account. To continue with the sandbox environment, simply enter your api_key and api_secret in their respective place. Once you enter your keys, select this environment in the upper right corner as pictured below. 
 
-<img width="902" src="https://github.com/alpacahq/alpaca-postman/assets/45433012/864dca84-93c2-4206-b381-81f25fc6ffca">
+<img width="902" src="https://github.com/Ordinath/alpaca-postman/assets/45433012/41d7a839-d03d-4495-a6e6-460b3e04c283">
 
 Once your environment is configured you’re ready to make your first call! The Clock or Calendar resources are a great place to start to make sure your environment is configured correctly. Head to the GET Clock request and press Send. You should receive a similar response to the one pictured below.
 
@@ -29,4 +29,3 @@ Once your environment is configured you’re ready to make your first call! The 
 
 ## Issues
 As an API-first product company, we are committed to providing the best developer experience. If you notice any bugs or just have a recommendation for how we can improve the collections please don't hesitate to file an [issue](https://github.com/alpacahq/alpaca-postman/issues).
-
