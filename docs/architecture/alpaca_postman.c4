@@ -1,0 +1,132 @@
+// docs/architecture/alpaca_postman.c4
+// generated_by: claude-opus-5 / layered-docs 2026-08
+// source_commit: ad68ba8e7a79725108f8df68cc4a12e9f01d6a75   source_branch: allium/layered-docs-2026-08   generated_at: 2026-08-21T21:43:34Z
+// confidence: medium   review_status: draft-needs-review
+model {
+  alpaca_postman = system 'Alpaca Postman Collections' {
+    #generated
+    description '
+      A publication repository holding exported Postman collections for the public Alpaca Broker, Trader and Market Data APIs,
+      plus an archive of superseded exports. It ships no runnable code: the artefacts are JSON collection exports that
+      developers fork into their own Postman workspace. Evidence: README.md, Postman Collections/, Deprecated/
+    '
+    technology 'Postman collection JSON (schema v2.0.0 / v2.1.0)'
+    link https://github.com/alpacahq/alpaca-postman 'Repository'
+    metadata {
+      okf 'docs/okf/system.md'
+      allium 'none: no .allium specs in this repository (git ls-files at ad68ba8)'
+      evidence 'README.md, Postman Collections/Broker_API.json, Postman Collections/Trader_v2_API.json, Postman Collections/Market_Data_v2_API.json, Deprecated/'
+    }
+
+    broker_collection = container 'Broker API Collection' {
+      #generated #entrypoint
+      description 'Postman export covering accounts, activities, assets, calendar, clock, corporate actions, documents, events, ACH relationships, banks, transfers, journals, trading, watchlists, OAuth and rebalancing folders; collection-level basic auth bound to api_key/api_secret variables. Evidence: Postman Collections/Broker_API.json'
+      technology 'Postman collection JSON v2.0.0'
+      metadata {
+        okf 'docs/okf/system.md'
+        allium 'none: no .allium specs in this repository'
+        evidence 'Postman Collections/Broker_API.json'
+      }
+    }
+
+    trader_collection = container 'Trader v2 API Collection' {
+      #generated #entrypoint
+      description 'Postman export covering account, orders, positions, assets, watchlists, calendar, clock, corporate action announcements, account configurations, activities and portfolio history against /v2 paths; every request sends Apca-Api-Key-Id and Apca-Api-Secret-Key headers bound to the APCA_API_KEY_ID and APCA_API_SECRET_KEY environment variables. Evidence: Postman Collections/Trader_v2_API.json'
+      technology 'Postman collection JSON v2.0.0'
+      metadata {
+        okf 'docs/okf/system.md'
+        allium 'none: no .allium specs in this repository'
+        evidence 'Postman Collections/Trader_v2_API.json'
+      }
+    }
+
+    market_data_collection = container 'Market Data v2 API Collection' {
+      #generated #entrypoint
+      description 'Postman export covering stock pricing, crypto pricing (v1beta1 and v1beta2) and news requests; every request sends the Apca-Api-Key-Id and Apca-Api-Secret-Key header keys, whose values come from the APCA_API_KEY_ID and APCA_API_SECRET_KEY Postman variables. Evidence: Postman Collections/Market_Data_v2_API.json'
+      technology 'Postman collection JSON v2.0.0'
+      metadata {
+        okf 'docs/okf/system.md'
+        allium 'none: no .allium specs in this repository'
+        evidence 'Postman Collections/Market_Data_v2_API.json'
+      }
+    }
+
+    deprecated_collections = container 'Deprecated Collections Archive' {
+      #generated #internal
+      description 'Five superseded v2.1.0 exports (Broker, Trader v2, Market Data v2, Data v2 stocks, Data v2 crypto) retained after the folder move. Evidence: Deprecated/, commit 792974c'
+      technology 'Postman collection JSON v2.1.0'
+      metadata {
+        okf 'docs/okf/system.md'
+        allium 'none: no .allium specs in this repository'
+        evidence 'Deprecated/'
+      }
+    }
+
+  }
+
+  ext_broker_api = external 'Alpaca Broker API' {
+    #generated #external
+    description 'Target of the Broker collection requests; sandbox and production hosts are documented in the collection description. Evidence: Postman Collections/Broker_API.json'
+  }
+
+  ext_trader_api = external 'Alpaca Trading API' {
+    #generated #external
+    description 'Target of the Trader v2 collection requests; paper and production hosts are documented in the collection description. Evidence: Postman Collections/Trader_v2_API.json'
+  }
+
+  ext_market_data_api = external 'Alpaca Market Data API' {
+    #generated #external
+    description 'Target of the Market Data collection requests (v1beta1 and v1beta2 stock, crypto and news paths). Evidence: Postman Collections/Market_Data_v2_API.json'
+  }
+
+  ext_postman_workspace = external 'Public Postman Workspace' {
+    #generated #external
+    description 'Where the collections are published and forked from by developers. Evidence: README.md'
+  }
+
+  ext_developer_docs = external 'Alpaca Developer Documentation' {
+    #generated #external
+    description 'Reference documentation linked for each API family from the repository README. Evidence: README.md'
+  }
+
+  ext_github_issues = external 'GitHub Issues' {
+    #generated #external
+    description 'Feedback and bug-report channel for the collections, linked from the README Issues section. Evidence: README.md'
+  }
+
+  ext_alpaca_signup = external 'Alpaca Account Sign-up' {
+    #generated #external
+    description 'Where the developer creates an account and generates the API key and secret the collections require. Evidence: README.md Getting Started'
+  }
+
+  developer_user = person 'API Developer' {
+    #generated
+    description 'Forks a collection and the sample environment, supplies own keys and sends requests. Evidence: README.md Getting Started'
+  }
+
+  alpaca_postman.broker_collection -[calls]-> ext_broker_api 'issues the collection requests against the host variable'
+  alpaca_postman.trader_collection -[calls]-> ext_trader_api 'issues the collection requests against the host variable'
+  alpaca_postman.market_data_collection -[calls]-> ext_market_data_api 'issues the collection requests against the host variable'
+  alpaca_postman -[publishes]-> ext_postman_workspace 'collections are distributed through the public workspace'
+  alpaca_postman -[uses]-> ext_developer_docs 'README links each collection to its API documentation'
+
+  developer_user -[uses]-> ext_postman_workspace 'forks the collection and environment'
+  developer_user -[uses]-> ext_github_issues 'reports collection bugs and requests'
+  developer_user -[uses]-> ext_alpaca_signup 'obtains the API key and secret'
+  developer_user -[uses]-> alpaca_postman.broker_collection 'runs the example requests'
+  developer_user -[uses]-> alpaca_postman.trader_collection 'runs the example requests'
+  developer_user -[uses]-> alpaca_postman.market_data_collection 'runs the example requests'
+}
+
+views {
+  view alpaca_postman_context {
+    title 'Alpaca Postman Collections — context'
+    include alpaca_postman, ext_broker_api, ext_trader_api, ext_market_data_api, ext_postman_workspace, ext_developer_docs, ext_github_issues, ext_alpaca_signup, developer_user
+    autoLayout TopBottom
+  }
+  view alpaca_postman_containers of alpaca_postman {
+    title 'Alpaca Postman Collections — containers'
+    include *
+    autoLayout LeftRight
+  }
+}
